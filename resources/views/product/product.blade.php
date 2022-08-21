@@ -21,9 +21,8 @@
 
 @section('content')
 
-    <nav class="navbar navbar-light bg-faded justify-content-between flex-nowrap flex-row">
+    <nav class="navbar navbar-light bg-faded navbar-expand justify-content-between flex-nowrap flex-row navbar-expand-sm bg-light justify-content-center">
         <div class="container-fluid">
-            <div class="main-header navbar navbar-expand navbar-white navbar-light">
                 <ul class="nav navbar-nav flex-row">
                     <li class="nav-item">
                         <a class="nav-link {{'productView'== request()->path() ? 'active' :  ''}}" aria-current="page" href="{{route('product.index')}}">عرض المنتجات</a>
@@ -47,7 +46,7 @@
                         <a class="nav-link {{'categoryCreate'== request()->path() ? 'active' : ''}}" aria-current="page" href="{{route('category.create')}}">انشاء صنف</a>
                     </li>
                 </ul>
-            </div>
+
         </div>
     </nav>
     @yield('type')
