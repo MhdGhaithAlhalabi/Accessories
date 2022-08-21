@@ -17,7 +17,7 @@ class ColorController extends Controller
     public function index()
     {
         $colors = Color::with('product');
-        return view('color\show_color',compact('colors'));
+        return view('color.show_color',compact('colors'));
     }
 
     /**
@@ -30,7 +30,7 @@ class ColorController extends Controller
         $collct = collect($request->all());
         $num = $collct->keys();
         $products = Product::find($num)->first();
-        return view('color/create_color',compact('products'));
+        return view('color.create_color',compact('products'));
     }
 
     /**
@@ -81,7 +81,7 @@ class ColorController extends Controller
         $collct = collect($color->product_id);
 
         $product = Product::find($collct)->first();
-        return view('color/edit_color',compact('color','product'));
+        return view('color.edit_color',compact('color','product'));
     }
 
     /**

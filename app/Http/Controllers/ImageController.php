@@ -17,7 +17,7 @@ class ImageController extends Controller
     public function index()
     {
         $images = Image::with('product');
-        return view('image\show_image',compact('images'));
+        return view('image.show_image',compact('images'));
     }
 
     /**
@@ -30,7 +30,7 @@ class ImageController extends Controller
         $collct = collect($request->all());
         $num = $collct->keys();
         $products = Product::find($num)->first();
-        return view('image/create_image',compact('products'));
+        return view('image.create_image',compact('products'));
     }
 
     /**
@@ -80,7 +80,7 @@ class ImageController extends Controller
         $collct = collect($image->product_id);
 
         $product = Product::find($collct)->first();
-        return view('image/edit_image',compact('image','product'));
+        return view('image.edit_image',compact('image','product'));
     }
 
     /**

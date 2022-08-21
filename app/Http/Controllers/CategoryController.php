@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::with('type')->get();
-        return view('category\show_category',compact('categories'));
+        return view('category.show_category',compact('categories'));
     }
 
     /**
@@ -28,7 +28,7 @@ class CategoryController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('category/create_category',compact('types'));
+        return view('category.create_category',compact('types'));
     }
 
     /**

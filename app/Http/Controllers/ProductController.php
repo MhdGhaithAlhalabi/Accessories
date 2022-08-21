@@ -86,7 +86,7 @@ class ProductController extends Controller
     {
         $types = Type::all();
         $categories = Category::all();
-        return view('product/edit_product',compact('product','categories','types'));
+        return view('product.edit_product',compact('product','categories','types'));
     }
 
     /**
