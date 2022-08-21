@@ -18,12 +18,12 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('type','category')->get();
-        return view('product\show_product')->with('products',$products);
+        return view('product.show_product')->with('products',$products);
     }
     public function index2()
     {
         $products = Product::with('type','category')->get();
-        return view('product\show_product2')->with('products',$products);
+        return view('product.show_product2')->with('products',$products);
     }
 
     /**
@@ -35,14 +35,14 @@ class ProductController extends Controller
     {
         $types = Type::all();
         $categories = Category::all();
-        return view('product/create_product',compact('types','categories'));
+        return view('product.create_product',compact('types','categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
