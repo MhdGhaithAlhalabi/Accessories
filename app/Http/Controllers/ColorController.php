@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\color;
+use App\Models\Color;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
