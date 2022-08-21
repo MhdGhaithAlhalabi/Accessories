@@ -60,7 +60,9 @@
                                     <td>{{$product->category->name}}</td>
                                     <td>
                                         @foreach($product->color as $color)
+                                            <div class="row">
                                             {{$color->color}}
+                                            </div>
                                             <div class="row">
                                                 <form  action="{{ route('color.delete' , $color->id) }}" method="POST">
                                                     @csrf
