@@ -38,6 +38,18 @@
         <div class="container">
 
             <h1>Accessories</h1>
+            @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">لوحة التحكم</a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">تسجيل الدخول</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">انشاء حساب</a>
+                        @endif
+                    @endauth
+            @endif
+
 
         </div>
         </div>
