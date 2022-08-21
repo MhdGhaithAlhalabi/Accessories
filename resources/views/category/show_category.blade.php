@@ -46,15 +46,14 @@
                     <td>
                         <div class="row">
                             <div class="col-sm">
-                                <a class="btn btn-success" href="{{route('category.edit' ,$category->id)}}"> التعديل</a>
+                                <a class="btn btn-success btn-block" style="margin-block: 2px" href="{{route('category.edit' ,$category->id)}}"> التعديل</a>
                             </div>
 
                             <div class="col-sm">
                                 <form  action="{{ route('category.delete' , $category->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">حذف</button>
-
+                                    <button type="submit" style="margin-block: 2px" class="btn btn-danger btn-block">حذف</button>
                                 </form>
                             </div>
                         </div>

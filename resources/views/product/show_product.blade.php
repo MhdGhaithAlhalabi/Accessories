@@ -85,14 +85,14 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-sm">
-                                                <a class="btn btn-primary" href="{{route('product.edit' ,$product->id)}}"> التعديل</a>
+                                                <a class="btn btn-primary btn-block" style="margin-block: 2px" href="{{route('product.edit' ,$product->id)}}"> التعديل</a>
                                             </div>
 
                                             <div class="col-sm">
                                                 <form  action="{{ route('product.delete' , $product->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">حذف</button>
+                                                    <button type="submit" style="margin-block: 2px" class="btn btn-danger btn-block">حذف</button>
                                                 </form>
                                             </div>
                                         </div>

@@ -64,13 +64,15 @@
                                             {{$color->color}}
                                             </div>
                                             <div class="row">
+                                                <div class="col-sm">
                                                 <form  action="{{ route('color.delete' , $color->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">حذف</button>
+                                                    <button type="submit" style="margin-block: 2px" class="btn btn-danger btn-block">حذف اللون</button>
                                                 </form>
+                                                </div>
                                                 <div class="col-sm">
-                                                    <a class="btn btn-primary" href="{{route('color.edit' ,$color->id)}}"> تعديل اللون</a>
+                                                    <a class="btn btn-primary btn-block" style="margin-block: 2px"  href="{{route('color.edit' ,$color->id)}}"> تعديل اللون</a>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -87,11 +89,11 @@
                                                     <form  action="{{ route('image.delete' , $image->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">حذف</button>
+                                                        <button type="submit" style="margin-block: 2px" class="btn btn-danger btn-block">حذف الصورة</button>
                                                     </form>
                                                 </div>
                                                 <div class="col-sm">
-                                                    <a class="btn btn-primary" href="{{route('image.edit' ,$image->id)}}"> تعديل الصورة</a>
+                                                    <a class="btn btn-primary btn-block" style="margin-block: 2px" href="{{route('image.edit' ,$image->id)}}"> تعديل الصورة</a>
                                                 </div>
                                             </div>
                                             <br>
@@ -100,11 +102,15 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-sm">
-                                                <a class="btn btn-success" href="{{route('image.create' ,$product->id)}}"> اضافة صورة</a>
+                                                <a class="btn btn-success btn-block" style="margin-block: 2px" href="{{route('image.create' ,$product->id)}}"> اضافة صورة</a>
                                             </div>
-                                            <div class="col-sm">
-                                                <a class="btn btn-success" href="{{route('color.create' ,$product->id)}}"> اضافة لون</a>
+                                        </div>
+
+                                        <div class="row">
+                                        <div class="col-sm">
+                                                <a class="btn btn-success btn-block" style="margin-block: 2px" href="{{route('color.create' ,$product->id)}}"> اضافة لون</a>
                                             </div>
+                                        </div>
                                         </div>
                                     </td>
                                 </tr>

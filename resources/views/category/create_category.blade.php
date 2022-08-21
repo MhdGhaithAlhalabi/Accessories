@@ -48,7 +48,7 @@
                     </div>
                 @endif
             </div>
-            <button type="submit" class="btn btn-primary">موافق</button>
+            <button type="submit" style="margin-block: 2px" class="btn btn-primary btn-block">موافق</button>
         </form>
 
     </div>
