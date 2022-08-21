@@ -21,10 +21,10 @@
 
 @section('content')
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="flex-wrap: nowrap;">
+    <nav class="navbar navbar-light bg-faded justify-content-between flex-nowrap flex-row">
         <div class="container-fluid">
             <div class="main-header navbar navbar-expand navbar-white navbar-light">
-                <ul class="navbar-nav">
+                <ul class="nav navbar-nav flex-row">
                     <li class="nav-item">
                         <a class="nav-link {{'productView'== request()->path() ? 'active' :  ''}}" aria-current="page" href="{{route('product.index')}}">عرض المنتجات</a>
                     </li>
