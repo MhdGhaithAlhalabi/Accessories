@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="main-header navbar navbar-expand navbar-white navbar-light">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link {{'productView'== request()->path() ? 'active' :  ''}}" aria-current="page" href="{{route('product.index')}}">عرض المنتجات</a>
                     </li>
