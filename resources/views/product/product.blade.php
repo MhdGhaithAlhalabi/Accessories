@@ -21,7 +21,7 @@
 
 @section('content')
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="flex-wrap: nowrap;">
         <div class="container-fluid">
             <div class="main-header navbar navbar-expand navbar-white navbar-light">
                 <ul class="navbar-nav">
