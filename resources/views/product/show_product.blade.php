@@ -77,7 +77,7 @@
                                     <td>
                                         @foreach($product->image as $image)
                                             <div class="card" style="width: 18rem;">
-                                                <img class="card-img-top" style="border-radius: 10px;display: block;margin-left: auto;margin-right: auto" src="{{$image->url}}" alt="Card image cap">
+                                                <img src="/storage/cover_images/{{ $image->url }}" >
                                             </div>
                                         @endforeach
                                         <br>
