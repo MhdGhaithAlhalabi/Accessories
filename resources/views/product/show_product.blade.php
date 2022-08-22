@@ -77,7 +77,7 @@
                                     <td>
                                         @foreach($product->image as $image)
                                             <div class="card" style="width: 18rem;">
-                                                <img src="/storage/cover_images/{{ $image->url }}" >
+                                                <img src="http://accessories-sy.herokuapp.com/storage/cover_images/{{ $image->url }}" >
                                             </div>
                                         @endforeach
                                         <br>
