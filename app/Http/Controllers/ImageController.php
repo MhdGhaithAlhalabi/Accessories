@@ -42,39 +42,22 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'url'=>'image|nullable|max:1999',
+            'url' => ['required', 'string', 'max:255'],
             'product_id'=>['required']        ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
-            'image'=> 'يجب ان تكون صورة',
-            'max'=> 'يجب للحجم ان لا يكون اكثر من 2 ميغا'
         ];
         $validator = Validator::make($request->all(),$rules,$customMessages);
 
         if ($validator->fails()) {
             return redirect()->route('image.create',$request->product_id)->withErrors($validator);
         }
-        // Handle File Upload
-        if($request->hasFile('url')){
-            // Get filename with the extension
-            $filenameWithExt = $request->file('url')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('url')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('url')->storeAs('public/cover_images', $fileNameToStore);
-        } else {
-            $fileNameToStore = 'noimage.jpg';
-        }
-        $image = new Image;
-        $image->product_id=$request->product_id;
-        $image->url = $fileNameToStore;
-        $image->save();
 
+        $image = Image::create([
+            'url' => $request->url,
+            'product_id'=>$request->product_id
+        ]);
 
         return redirect()->route('image.create',$request->product_id)->with('message','success');
     }

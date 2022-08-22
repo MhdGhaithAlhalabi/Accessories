@@ -20,18 +20,13 @@
 
     <div class="container">
         <p>انشاء صورة</p>
-        <form action="{{route('image.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('image.store')}}" method="POST">
             @csrf
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Upload</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="url" id="inputGroupFile01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                </div>
-            </div>
-
+            <div class="form-group">
+                <label for="name">الرابط</label>
+                <label>
+                    <input type="text" name="url" class="form-control" placeholder="الرابط">
+                </label>
                 @if($errors->has('url'))
                     <div class="alert alert-danger">{{ $errors->first('url') }}</div>
                 @endif

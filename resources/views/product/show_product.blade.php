@@ -77,7 +77,7 @@
                                     <td>
                                         @foreach($product->image as $image)
                                             <div class="card" style="width: 18rem;">
-                                                <img src="http://accessories-sy.herokuapp.com/storage/cover_images/{{ $image->url }}" >
+                                                <img class="card-img-top" style="border-radius: 10px;display: block;margin-left: auto;margin-right: auto" src="{{$image->url}}" alt="Card image cap">
                                             </div>
                                         @endforeach
                                         <br>
