@@ -17,7 +17,8 @@ class TypeController extends Controller
     public function index()
     {
         $types = Type::all();
-        return view('type.show_type',compact('types'));
+        $categories = Category::with('type')->get();
+        return view('type.show_type',compact('types','categories'));
     }
 
     /**
@@ -49,14 +50,14 @@ class TypeController extends Controller
         $validator = Validator::make($request->all(), $rules,$customMessages);
 
         if ($validator->fails()) {
-            return redirect()->route('type.create')->withErrors($validator);
+            return redirect()->route('type.index')->withErrors($validator);
         }
 
         $product = Type::create([
             'name' => $request->name,
         ]);
 
-        return redirect()->route('type.create')->with('message','success');
+        return redirect()->route('type.index')->with('message','success');
     }
 
     /**

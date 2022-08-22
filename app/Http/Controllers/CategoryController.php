@@ -52,7 +52,7 @@ class CategoryController extends Controller
 
 
         if ($validator->fails()) {
-            return redirect()->route('category.create')->withErrors($validator);
+            return redirect()->route('type.index')->withErrors($validator);
         }
 
         $category = Category::create([
@@ -60,7 +60,7 @@ class CategoryController extends Controller
             'type_id'=>$request->type_id
         ]);
 
-        return redirect()->route('category.create')->with('message','success');
+        return redirect()->route('type.index')->with('message','success');
     }
 
     /**
@@ -111,10 +111,10 @@ class CategoryController extends Controller
         }
         if(asset($category)){
             $category->update($request->all());
-            return redirect()->route('category.index')->with('message','success');
+            return redirect()->route('type.index')->with('message','success');
 
         }else{
-            return redirect()->route('category.index')->with('message','you cant do that');
+            return redirect()->route('type.index')->with('message','you cant do that');
         }
     }
 
@@ -127,7 +127,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('category.index')
+        return redirect()->route('type.index')
             ->with('message','category deleted');
     }
 }
