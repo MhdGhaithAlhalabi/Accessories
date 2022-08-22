@@ -56,8 +56,8 @@
                 @enderror
                 <div class="row">
                     <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
+                        <div class="form-check">
+                            <input type="checkbox" name="remember" value="1" id="remember">
                             <label for="remember">
                                 تذكرني
                             </label>
