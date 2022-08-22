@@ -38,9 +38,15 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'name' => ['required', 'string', 'max:255', 'unique:types'],
-        ]);
+        ];
+
+        $customMessages = [
+            'required' => 'هذا الحقل مطلوب',
+            'unique' => 'الاسم موجود سابقاَ'
+        ];
+        $validator = Validator::make($request->all(), $rules,$customMessages);
 
         if ($validator->fails()) {
             return redirect()->route('type.create')->withErrors($validator);
@@ -84,9 +90,14 @@ class TypeController extends Controller
      */
     public function update(Request $request,  Type $type)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255', 'unique:types'],
-        ]);
+        $rules = [
+            'name' => ['required', 'string', 'max:255'],
+        ];
+
+        $customMessages = [
+            'required' => 'هذا الحقل مطلوب',
+        ];
+        $validator = Validator::make($request->all(),$rules,$customMessages );
 
         if ($validator->fails()) {
             return redirect()->route('type.edit',$type)->withErrors($validator);

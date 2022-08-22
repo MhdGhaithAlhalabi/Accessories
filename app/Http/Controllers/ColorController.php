@@ -41,10 +41,15 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'color' => ['required', 'string', 'max:255'],
-            'product_id'=>['required']
-        ]);
+            'product_id'=>['required']      ];
+
+        $customMessages = [
+            'required' => 'هذا الحقل مطلوب',
+        ];
+        $validator = Validator::make($request->all(),$rules,$customMessages);
+
 
         if ($validator->fails()) {
             return redirect()->route('color.create',$request->product_id)->withErrors($validator);
@@ -93,10 +98,14 @@ class ColorController extends Controller
      */
     public function update(Request $request, Color $color)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'color' => ['required', 'string', 'max:255'],
-            'product_id' => ['required']
-        ]);
+            'product_id'=>['required']      ];
+
+        $customMessages = [
+            'required' => 'هذا الحقل مطلوب',
+        ];
+        $validator = Validator::make($request->all(),$rules,$customMessages);
 
         if ($validator->fails()) {
             return redirect()->route('color.edit',$color)->withErrors($validator);

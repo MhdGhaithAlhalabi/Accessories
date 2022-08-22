@@ -41,10 +41,14 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'url' => ['required', 'string', 'max:255'],
-            'product_id'=>['required']
-        ]);
+            'product_id'=>['required']        ];
+
+        $customMessages = [
+            'required' => 'هذا الحقل مطلوب',
+        ];
+        $validator = Validator::make($request->all(),$rules,$customMessages);
 
         if ($validator->fails()) {
             return redirect()->route('image.create',$request->product_id)->withErrors($validator);
@@ -92,10 +96,15 @@ class ImageController extends Controller
      */
     public function update(Request $request, image $image)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'url' => ['required', 'string', 'max:255'],
-            'product_id' => ['required']
-        ]);
+            'product_id'=>['required']        ];
+
+        $customMessages = [
+            'required' => 'هذا الحقل مطلوب',
+        ];
+        $validator = Validator::make($request->all(),$rules,$customMessages);
+
 
         if ($validator->fails()) {
             return redirect()->route('image.edit',$image)->withErrors($validator);

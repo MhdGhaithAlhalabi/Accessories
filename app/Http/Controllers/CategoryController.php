@@ -39,10 +39,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'name' => ['required', 'string', 'max:255', 'unique:categories'],
             'type_id'=>['required']
-        ]);
+        ];
+
+        $customMessages = [
+            'required' => 'هذا الحقل مطلوب',
+            'unique'=> 'هذا الاسم موجود سابقاً'
+        ];
+        $validator = Validator::make($request->all(),$rules,$customMessages);
+
 
         if ($validator->fails()) {
             return redirect()->route('category.create')->withErrors($validator);
@@ -88,10 +95,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'type_id' => ['required']
-        ]);
+            'type_id'=>['required']
+        ];
+
+        $customMessages = [
+            'required' => 'هذا الحقل مطلوب',
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$customMessages);
 
         if ($validator->fails()) {
             return redirect()->route('category.edit',$category)->withErrors($validator);

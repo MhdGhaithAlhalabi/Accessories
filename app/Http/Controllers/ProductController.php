@@ -46,7 +46,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'name' => ['required', 'string', 'max:255', 'unique:products'],
             'details'=>['required'],
             'price'=>['required'],
@@ -54,7 +54,13 @@ class ProductController extends Controller
             'status'=>['nullable'],
             'category_id'=>['required'],
             'type_id'=>['required']
-        ]);
+        ];
+
+        $customMessages = [
+            'required' => 'هذا الحقل مطلوب',
+            'unique' => 'الاسم موجود سابقاَ'
+        ];
+        $validator = Validator::make($request->all(), $rules,$customMessages);
 
         if ($validator->fails()) {
             return redirect()->route('product.create')->withErrors($validator);
@@ -98,7 +104,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
             'details'=>['required'],
             'price'=>['required'],
@@ -106,7 +112,13 @@ class ProductController extends Controller
             'status'=>['nullable'],
             'category_id'=>['required'],
             'type_id'=>['required']
-        ]);
+        ];
+
+        $customMessages = [
+            'required' => 'هذا الحقل مطلوب'
+        ];
+        $validator = Validator::make($request->all(),$rules,$customMessages);
+
 
         if ($validator->fails()) {
             return redirect()->route('product.edit',$product)->withErrors($validator);
