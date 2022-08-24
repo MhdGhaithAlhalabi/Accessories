@@ -28,7 +28,7 @@ class Product extends Model
     }
     public function menu()
     {
-        return $this->hasMany(Menu::class);
+        return $this->hasOne(Menu::class);
     }
     public function image()
     {

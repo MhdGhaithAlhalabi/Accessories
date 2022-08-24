@@ -52,7 +52,6 @@ class MenuController extends Controller
     {
         $rules = [
             'product_id' => ['required'],
-
         ];
 
         $customMessages = [
