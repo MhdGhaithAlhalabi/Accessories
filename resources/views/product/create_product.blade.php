@@ -154,7 +154,7 @@
                         //console.log(data);
                         op += '<option value="0" selected disabled>اختر الصنف</option>';
                         for (var i = 0; i < data.length; i++) {
-                            op += '<option value="' + data[i].id + '">' + data[i].type_name +'</option>';
+                            op += '<option value="' + data[i].id + '">' + data[i].category_name +'</option>';
                         }
                         $('#category').html('');
                         $('#category').append(op);

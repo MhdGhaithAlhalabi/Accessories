@@ -134,7 +134,7 @@ class TypeController extends Controller
     }
     public function findTypeByName(Request $request)
     {
-        $data = Category::select('type_name', 'id')->where('type_id',$request->id)->take(100)->get();
+        $data = Category::select('category_name', 'id')->where('type_id',$request->id)->take(100)->get();
         return response()->json($data);
     }
 }
