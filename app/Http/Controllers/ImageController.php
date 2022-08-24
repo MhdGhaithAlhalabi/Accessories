@@ -42,11 +42,12 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'url' => ['required', 'string', 'max:255'],
+            'url' => ['required', 'string', 'url'],
             'product_id'=>['required']        ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
+            'url'=>'يجب وضع رابط'
         ];
         $validator = Validator::make($request->all(),$rules,$customMessages);
 
@@ -59,7 +60,7 @@ class ImageController extends Controller
             'product_id'=>$request->product_id
         ]);
 
-        return redirect()->route('image.create',$request->product_id)->with('message','success');
+        return redirect()->route('image.create',$request->product_id)->with('message','تم اضافة الصورة');
     }
 
     /**
@@ -97,11 +98,12 @@ class ImageController extends Controller
     public function update(Request $request, image $image)
     {
         $rules = [
-            'url' => ['required', 'string', 'max:255'],
+            'url' => ['required', 'string', 'url'],
             'product_id'=>['required']        ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
+            'url'=>'يجب وضع رابط'
         ];
         $validator = Validator::make($request->all(),$rules,$customMessages);
 
@@ -111,10 +113,10 @@ class ImageController extends Controller
         }
         if(asset($image)){
             $image->update($request->all());
-            return redirect()->route('product.index')->with('message','success');
+            return redirect()->route('product.index')->with('message','تم تعديل الصورة');
 
         }else{
-            return redirect()->route('product.index')->with('message','you cant do that');
+            return redirect()->route('product.index')->with('message','لا يمكن التعديل');
         }
     }
 
@@ -128,6 +130,6 @@ class ImageController extends Controller
     {
         $image->delete();
         return redirect()->route('product.index')
-            ->with('message', 'image deleted');
+            ->with('message', 'تم حذف الصورة');
     }
 }

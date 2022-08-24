@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
     protected $table= 'categories';
-    protected $fillable =['name','type_id'];
+    protected $fillable =['category_name','type_id','category_image'];
     public function type()
     {
         return $this->belongsTo(Type::class);

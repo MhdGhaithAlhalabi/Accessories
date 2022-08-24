@@ -60,7 +60,7 @@ class ColorController extends Controller
             'product_id'=>$request->product_id
         ]);
 
-        return redirect()->route('color.create',$request->product_id)->with('message','success');
+        return redirect()->route('color.create',$request->product_id)->with('message','تم اضافة اللون');
     }
 
     /**
@@ -112,10 +112,10 @@ class ColorController extends Controller
         }
         if(asset($color)){
             $color->update($request->all());
-            return redirect()->route('product.index')->with('message','success');
+            return redirect()->route('product.index')->with('message','تم تعديل اللون');
 
         }else{
-            return redirect()->route('product.index')->with('message','you cant do that');
+            return redirect()->route('product.index')->with('message','لا يمكن التعديل');
         }
     }
 
@@ -129,6 +129,6 @@ class ColorController extends Controller
     {
             $color->delete();
             return redirect()->route('product.index')
-                ->with('message', 'color deleted');
+                ->with('message', 'تم حذف اللون');
     }
 }

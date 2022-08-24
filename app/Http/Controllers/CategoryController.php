@@ -40,13 +40,16 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => ['required', 'string', 'max:255', 'unique:categories'],
-            'type_id'=>['required']
+            'category_name' => ['required', 'string', 'max:255', 'unique:categories'],
+            'type_id'=>['required'],
+            'category_image'=>['required','url'],
         ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
-            'unique'=> 'هذا الاسم موجود سابقاً'
+            'unique'=> 'هذا الاسم موجود سابقاً',
+            'url'=>'يجب ان يكون رابط'
+
         ];
         $validator = Validator::make($request->all(),$rules,$customMessages);
 
@@ -56,11 +59,12 @@ class CategoryController extends Controller
         }
 
         $category = Category::create([
-            'name' => $request->name,
-            'type_id'=>$request->type_id
+            'category_name' => $request->category_name,
+            'type_id'=>$request->type_id,
+            'category_image'=>$request->category_image
         ]);
 
-        return redirect()->route('type.index')->with('message','success');
+        return redirect()->route('type.index')->with('message','تمت اضافة الصنف');
     }
 
     /**
@@ -96,12 +100,14 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $rules = [
-            'name' => ['required', 'string', 'max:255'],
-            'type_id'=>['required']
+            'category_name' => ['required', 'string', 'max:255','unique:categories,category_name,'.$category->id],
+            'type_id'=>['required'],
+            'category_image' => ['required','url']
         ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
+            'url'=>'يجب ان يكون رابط'
         ];
 
         $validator = Validator::make($request->all(),$rules,$customMessages);
@@ -111,10 +117,10 @@ class CategoryController extends Controller
         }
         if(asset($category)){
             $category->update($request->all());
-            return redirect()->route('type.index')->with('message','success');
+            return redirect()->route('type.index')->with('message','تم تعديل الصنف');
 
         }else{
-            return redirect()->route('type.index')->with('message','you cant do that');
+            return redirect()->route('type.index')->with('message','لا يمكنك التعديل');
         }
     }
 
@@ -128,6 +134,6 @@ class CategoryController extends Controller
     {
         $category->delete();
         return redirect()->route('type.index')
-            ->with('message','category deleted');
+            ->with('message','تم حذف الصنف');
     }
 }

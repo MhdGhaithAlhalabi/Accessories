@@ -9,7 +9,7 @@ class Type extends Model
 {
     use HasFactory;
     protected $table= 'types';
-    protected $fillable =['name'];
+    protected $fillable =['type_name','type_image'];
     public function product()
     {
         return $this->hasMany(Product::class);

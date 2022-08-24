@@ -22,19 +22,30 @@
 <form action="{{route('type.update',$type)}}" method="POST">
     @csrf
     <div class="form-group">
-        <label for="name">name</label>
+        <label for="name">type_name</label>
         <label>
-            <input type="text" name="name" value="{{$type->name}}" class="form-control" placeholder="الاسم">
+            <input type="text" name="type_name" value="{{$type->type_name}}" class="form-control" placeholder="الاسم">
         </label>
-        @if($errors->has('name'))
-            <div class="alert alert-danger">{{ $errors->first('name') }}</div>
+        @if($errors->has('type_name'))
+            <div class="alert alert-danger">{{ $errors->first('type_name') }}</div>
         @endif
-        @if(session()->has('message'))
-            <div class="alert alert-success">
-                {{ session()->get('message') }}
-            </div>
-        @endif
+
     </div>
+    <div class="form-group">
+        <label for="name">type_image</label>
+        <label>
+            <input type="text" name="type_image" value="{{$type->type_image}}" class="form-control" placeholder="الصورة">
+        </label>
+        @if($errors->has('type_image'))
+            <div class="alert alert-danger">{{ $errors->first('type_image') }}</div>
+        @endif
+
+    </div>
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
     <button type="submit" style="margin-block: 2px" class="btn btn-primary btn-block">موافق</button>
 </form>
 

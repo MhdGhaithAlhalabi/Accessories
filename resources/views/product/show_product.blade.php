@@ -65,8 +65,8 @@
                                     <td>{{$product->status}}</td>
                                     <td>{{$product->priceSale}}</td>
                                     <td>{{$product->rate}}</td>
-                                    <td>{{$product->type->name}}</td>
-                                    <td>{{$product->category->name}}</td>
+                                    <td>{{$product->type->type_name}}</td>
+                                    <td>{{$product->category->category_name}}</td>
                                     <td>
                                         @foreach($product->color as $color)
                                             <div class="row">

@@ -93,9 +93,9 @@
                             <div class="form-group">
                                 <label>النوع</label>
                                 <select name="type_id" class="form-control type">
-                                    <option value="{{$product->type->id}}" >{{$product->type->name}}</option>
+                                    <option value="{{$product->type->id}}" >{{$product->type->type_name}}</option>
                                     @foreach($types as $type)
-                                        <option value="{{$type->id}}"> {{$type->name}}</option>
+                                        <option value="{{$type->id}}"> {{$type->type_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -107,9 +107,9 @@
                             <div class="form-group">
                                 <label>الصنف</label>
                                 <select name="category_id" class="form-control category" id="category">
-                                    <option value="{{$product->category->id}}">{{$product->category->name}}</option>
+                                    <option value="{{$product->category->id}}">{{$product->category->category_name}}</option>
                                     @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option value="{{$category->id}}">{{$category->category_name}}</option>
                                     @endforeach
 
                                 </select>
@@ -153,7 +153,7 @@
                         //console.log(data);
                         op += '<option value="0" selected disabled>اختر الصنف</option>';
                         for (var i = 0; i < data.length; i++) {
-                            op += '<option value="' + data[i].id + '">' + data[i].name +'</option>';
+                            op += '<option value="' + data[i].id + '">' + data[i].type_name +'</option>';
                         }
                         $('#category').html('');
                         $('#category').append(op);

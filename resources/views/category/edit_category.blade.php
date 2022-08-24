@@ -22,25 +22,32 @@
 <form action="{{route('category.update',$category)}}" method="POST">
     @csrf
     <div class="form-group">
-        <label for="name">الاسم</label>
+        <label for="category_name">الاسم</label>
         <label>
-            <input type="text" name="name" value="{{$category->name}}" class="form-control" placeholder="الاسم">
+            <input type="text" name="category_name" value="{{$category->category_name}}" class="form-control" placeholder="الاسم">
         </label>
-        @if($errors->has('name'))
-            <div class="alert alert-danger">{{ $errors->first('name') }}</div>
+        @if($errors->has('category_name'))
+            <div class="alert alert-danger">{{ $errors->first('category_name') }}</div>
         @endif
         <div class="row">
         <label for="type_id">النوع</label>
             <label>
         <select class="form-control" name="type_id" aria-label="Default select example">
             @foreach($types as $type)
-                <option  value="{{$type->id}}">{{$type->name}}</option>
+                <option  value="{{$type->id}}">{{$type->type_name}}</option>
             @endforeach
         </select>
         </label>
         @if($errors->has('type_id'))
             <div class="alert alert-danger">{{ $errors->first('type_id') }}</div>
         @endif
+            <label for="category_image">الاسم</label>
+            <label>
+                <input type="text" name="category_image" value="{{$category->category_image}}" class="form-control" placeholder="الصورة">
+            </label>
+            @if($errors->has('category_image'))
+                <div class="alert alert-danger">{{ $errors->first('category_image') }}</div>
+            @endif
         </div>
         @if(session()->has('message'))
             <div class="alert alert-success">

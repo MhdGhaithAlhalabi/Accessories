@@ -40,12 +40,14 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => ['required', 'string', 'max:255', 'unique:types'],
+            'type_name' => ['required', 'string', 'max:255', 'unique:types'],
+            'type_image' => ['required','url']
         ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
-            'unique' => 'الاسم موجود سابقاَ'
+            'unique' => 'الاسم موجود سابقاَ',
+            'url'=> 'يجب ان يكون رابط'
         ];
         $validator = Validator::make($request->all(), $rules,$customMessages);
 
@@ -54,10 +56,12 @@ class TypeController extends Controller
         }
 
         $product = Type::create([
-            'name' => $request->name,
+            'type_name' => $request->type_name,
+            'type_image' => $request->type_image,
+
         ]);
 
-        return redirect()->route('type.index')->with('message','success');
+        return redirect()->route('type.index')->with('message','تمت اضافة النوع');
     }
 
     /**
@@ -92,11 +96,14 @@ class TypeController extends Controller
     public function update(Request $request,  Type $type)
     {
         $rules = [
-            'name' => ['required', 'string', 'max:255'],
+            'type_name' => ['required', 'string', 'max:255','unique:types,type_name,'.$type->id],
+            'type_image' => ['required','url']
         ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
+            'url'=>'يجب ان يكون رابط',
+            'unique'=> 'هذا الاسم موجود سابقاً',
         ];
         $validator = Validator::make($request->all(),$rules,$customMessages );
 
@@ -105,10 +112,10 @@ class TypeController extends Controller
         }
         if(asset($type)){
             $type->update($request->all());
-            return redirect()->route('type.index')->with('message','success');
+            return redirect()->route('type.index')->with('message','تمت تعديل النوع');
 
         }else{
-            return redirect()->route('type.index')->with('message','you cant do that');
+            return redirect()->route('type.index')->with('message','لا يمكن الاضافة');
         }
 
     }
@@ -123,11 +130,11 @@ class TypeController extends Controller
     {
         $type->delete();
         return redirect()->route('type.index')
-            ->with('message','type deleted');
+            ->with('message','تم حذف النوع');
     }
     public function findTypeByName(Request $request)
     {
-        $data = Category::select('name', 'id')->where('type_id',$request->id)->take(100)->get();
+        $data = Category::select('type_name', 'id')->where('type_id',$request->id)->take(100)->get();
         return response()->json($data);
     }
 }

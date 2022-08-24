@@ -105,7 +105,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $rules = [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255','unique:products,name,'.$product->id],
             'details'=>['required'],
             'price'=>['required'],
             'priceSale'=>['nullable'],
@@ -115,7 +115,9 @@ class ProductController extends Controller
         ];
 
         $customMessages = [
-            'required' => 'هذا الحقل مطلوب'
+            'required' => 'هذا الحقل مطلوب',
+            'unique' => 'الاسم موجود سابقاَ'
+
         ];
         $validator = Validator::make($request->all(),$rules,$customMessages);
 

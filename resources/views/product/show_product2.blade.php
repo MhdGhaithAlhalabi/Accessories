@@ -56,8 +56,8 @@
                                 <tr>
                                     <th scope="row">{{++$i}}</th>
                                     <td>{{$product->name}}</td>
-                                    <td>{{$product->type->name}}</td>
-                                    <td>{{$product->category->name}}</td>
+                                    <td>{{$product->type->type_name}}</td>
+                                    <td>{{$product->category->category_name}}</td>
                                     <td>
                                         @foreach($product->color as $color)
                                             <div class="row">
