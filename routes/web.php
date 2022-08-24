@@ -97,10 +97,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/feedbackReadView', [FeedbackController::class, 'index2']);
     Route::post('/feedbackRead/{id}', [FeedbackController::class, 'feedbackRead']);
     //MENU CONTROLLER
-    Route::get('/outOfMenu', [MenuController::class, 'outOfMenu'])->name('outOfMenu');
-    Route::post('/menuStore', [MenuController::class, 'store'])->name('menu-store');
-    Route::delete('/menuDelete/{id}', [MenuController::class, 'destroy'])->name('menu-delete');
-    Route::get('/Menu', [MenuController::class, 'index'])->name('menu-index');
+    Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+    Route::post('/menuStore', [MenuController::class, 'store'])->name('menu.store');
+    Route::delete('/menuDelete/{menu}', [MenuController::class, 'destroy'])->name('menu.delete');
     //CUSTOMER CONTROLLER
     Route::get('/customerView', [CustomerController::class, 'index'])->name('customer-index');
 });
