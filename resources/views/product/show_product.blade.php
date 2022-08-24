@@ -35,6 +35,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
+                        <div class="table-responsive-sm table-responsive-md table-responsive-lg">
                         <table id="example1" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
                             <thead>
                             <tr role="row">
@@ -47,6 +48,7 @@
                                 <th scope="col">التقييم</th>
                                 <th scope="col">النوع</th>
                                 <th scope="col">الصنف</th>
+                                <th scope="col">يوجد اسم</th>
                                 <th scope="col">الالوان</th>
                                 <th scope="col">الصور</th>
                                 <th scope="col">التعديلات</th>
@@ -67,6 +69,7 @@
                                     <td>{{$product->rate}}</td>
                                     <td>{{$product->type->type_name}}</td>
                                     <td>{{$product->category->category_name}}</td>
+                                    <td>{{$product->has_name}}</td>
                                     <td>
                                         @foreach($product->color as $color)
                                             <div class="row">
@@ -111,6 +114,7 @@
                                 <th scope="col">التقييم</th>
                                 <th scope="col">النوع</th>
                                 <th scope="col">الصنف</th>
+                                <th scope="col">يوجد اسم</th>
                                 <th scope="col">الالوان</th>
                                 <th scope="col">الصور</th>
                                 <th scope="col">التعديلات</th>
@@ -119,7 +123,7 @@
                         </table>
                     </div>
                 </div>
-
+</div>
             </div>
         </div>
         <!-- /.card-body -->

@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignId('product_id');
             $table->foreignId('cart_id');
             $table->integer('qty');
-            $table->text('message')->nullable();
+            $table->text('color');
+            $table->text('has_name');
             $table->timestamps();
         });
     }

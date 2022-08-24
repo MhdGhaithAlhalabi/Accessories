@@ -118,6 +118,26 @@
                                 <div class="alert alert-danger">{{ $errors->first('category_id') }}</div>
                             @endif
                         </div>
+                        <div class="col-sm-6">
+                            <!-- radio -->
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="0" name="has_name" {{$product->has_name == 0 ? 'checked' : ''}}>
+                                    <label class="form-check-label">لا يوجد اسم</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="1" name="has_name" {{$product->has_name == 1 ? 'checked' : ''}}>
+                                    <label class="form-check-label">اسم واحد</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="2" name="has_name" {{$product->has_name == 2 ? 'checked' : ''}}>
+                                    <label class="form-check-label">اسمين</label>
+                                </div>
+                                @if($errors->has('has_name'))
+                                    <div class="alert alert-danger">{{ $errors->first('has_name') }}</div>
+                                @endif
+                            </div>
+                        </div>
                         <button type="submit" style="margin-block: 2px" class="btn btn-primary btn-block">موافق</button>
                     </div>
                 </form>

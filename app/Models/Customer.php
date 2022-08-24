@@ -9,7 +9,7 @@ class Customer extends Model
 {
     use HasFactory;
     protected $table= 'customers';
-    protected $fillable =['name','phone'];
+    protected $fillable =['name','phone','city'];
     public function rate()
     {
         return $this->hasMany(Rate::class);

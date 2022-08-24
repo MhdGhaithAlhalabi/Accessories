@@ -53,22 +53,38 @@ class ProductController extends Controller
             'priceSale'=>['nullable'],
             'status'=>['nullable'],
             'category_id'=>['required'],
-            'type_id'=>['required']
+            'type_id'=>['required'],
+            'has_name'=>['required']
+
         ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
             'unique' => 'الاسم موجود سابقاَ'
         ];
-        $validator = Validator::make($request->all(), $rules,$customMessages);
+       // 'rate' => 5,
+        $validator = Validator::make(
+
+      $request->all()
+            , $rules,$customMessages);
 
         if ($validator->fails()) {
             return redirect()->route('product.create')->withErrors($validator);
         }
 
-        $product = Product::create($request->all());
+        $product = Product::create(  [
+            'type_id' => $request->type_id,
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'details' => $request->details,
+            'price' => $request->price,
+            'priceSale' => $request->priceSale,
+            'status' => $request->status,
+            'has_name'=>$request->has_name,
+            'rate' => 5,
+        ]);
 
-        return redirect()->route('product.create')->with('message','success');
+        return redirect()->route('product.create')->with('message','تمت اضافة المنتج بنجاح');
     }
 
     /**
@@ -111,7 +127,8 @@ class ProductController extends Controller
             'priceSale'=>['nullable'],
             'status'=>['nullable'],
             'category_id'=>['required'],
-            'type_id'=>['required']
+            'type_id'=>['required'],
+            'has_name'=>['required']
         ];
 
         $customMessages = [

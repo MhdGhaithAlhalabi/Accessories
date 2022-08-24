@@ -23,6 +23,7 @@ return new class extends Migration
             $table->double('rate')->nullable();
             $table->foreignId('type_id');
             $table->foreignId('category_id');
+            $table->string('has_name');
             $table->timestamps();
         });
 
