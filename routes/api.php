@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Customer\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FeedbackController;
@@ -19,18 +20,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'customer','namespace'=>'Customer'],function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:customer-api']);
 });
+Route::group(['prefix' => 'customer','namespace'=>'Customer'],function () {
 ///////////////////////////////flutter api////////////////////////////////
 //CUSTOMER CONTROLLER
-Route::post('/customerStore', [CustomerController::class, 'Store']);//flutter
+Route::post('/customerStore', [CustomerController::class, 'Store'])->middleware(['auth:customer-api']);//flutter
 //ORDER CONTROLLER
-Route::post('/orderStore', [OrderController::class, 'Store']);//flutter
+Route::post('/orderStore', [OrderController::class, 'Store'])->middleware(['auth:customer-api']);//flutter
 //CART CONTROLLER
-Route::get('/orderCustomerView/{customer_id}', [CartController::class, 'index2']);//flutter
+Route::get('/orderCustomerView', [CartController::class, 'index'])->middleware(['auth:customer-api']);//flutter
 //FEEDBACK CONTROLLER
-Route::post('/feedbackStore', [FeedbackController::class, 'store']);//flutter
+Route::post('/feedbackStore', [FeedbackController::class, 'store'])->middleware(['auth:customer-api']);//flutter
 //RATE CONTROLLER
-Route::get('/rateView/{id}', [RateController::class, 'show']);//flutter
-Route::post('/rateStore', [RateController::class, 'store']);//flutter
+Route::get('/rateView/{id}', [RateController::class, 'show'])->middleware(['auth:customer-api']);//flutter
+Route::post('/rateStore', [RateController::class, 'store'])->middleware(['auth:customer-api']);//flutter
+});
