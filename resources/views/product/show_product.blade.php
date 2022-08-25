@@ -49,6 +49,7 @@
                                 <th scope="col">النوع</th>
                                 <th scope="col">الصنف</th>
                                 <th scope="col">يوجد اسم</th>
+                                <th scope="col">يوجد قياس</th>
                                 <th scope="col">الالوان</th>
                                 <th scope="col">الصور</th>
                                 <th scope="col">التعديلات</th>
@@ -70,6 +71,7 @@
                                     <td>{{$product->type->type_name}}</td>
                                     <td>{{$product->category->category_name}}</td>
                                     <td>{{$product->has_name}}</td>
+                                    <td>{{$product->has_measure}}</td>
                                     <td>
                                         @foreach($product->color as $color)
                                             <div class="row">
@@ -115,6 +117,7 @@
                                 <th scope="col">النوع</th>
                                 <th scope="col">الصنف</th>
                                 <th scope="col">يوجد اسم</th>
+                                <th scope="col">يوجد قياس</th>
                                 <th scope="col">الالوان</th>
                                 <th scope="col">الصور</th>
                                 <th scope="col">التعديلات</th>

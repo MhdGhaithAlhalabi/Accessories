@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('qty');
             $table->text('color');
             $table->text('has_name');
+            $table->text('has_measure');
             $table->timestamps();
         });
     }

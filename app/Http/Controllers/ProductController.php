@@ -54,7 +54,9 @@ class ProductController extends Controller
             'status'=>['nullable'],
             'category_id'=>['required'],
             'type_id'=>['required'],
-            'has_name'=>['required']
+            'has_name'=>['required'],
+            'has_measure'=>['required'],
+
 
         ];
 
@@ -81,6 +83,7 @@ class ProductController extends Controller
             'priceSale' => $request->priceSale,
             'status' => $request->status,
             'has_name'=>$request->has_name,
+            'has_measure'=>$request->has_measure,
             'rate' => 5,
         ]);
 
@@ -128,7 +131,9 @@ class ProductController extends Controller
             'status'=>['nullable'],
             'category_id'=>['required'],
             'type_id'=>['required'],
-            'has_name'=>['required']
+            'has_name'=>['required'],
+            'has_measure'=>['required'],
+
         ];
 
         $customMessages = [

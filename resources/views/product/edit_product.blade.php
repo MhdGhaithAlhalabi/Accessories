@@ -86,7 +86,22 @@
                             <div class="alert alert-danger">{{ $errors->first('priceSale') }}</div>
                         @endif
                     </div>
-
+                    <div class="col-sm-6">
+                        <!-- radio -->
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="1" name="has_measure" {{$product->has_measure == 1 ? 'checked' : ''}}>
+                                <label class="form-check-label">يوجد قياس</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="0" name="has_measure" {{$product->has_measure == 0 ? 'checked' : ''}}>
+                                <label class="form-check-label">لا يوجد قياس</label>
+                            </div>
+                            @if($errors->has('has_measure'))
+                                <div class="alert alert-danger">{{ $errors->first('has_measure') }}</div>
+                            @endif
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <!-- select -->

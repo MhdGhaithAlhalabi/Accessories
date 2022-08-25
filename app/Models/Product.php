@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $table= 'products';
-    protected $fillable =['type_id','name','price','details','rate','priceSale','status','category_id','has_name'];
+    protected $fillable =['type_id','name','price','details','rate','priceSale','status','category_id','has_name','has_measure'];
     public function rate()
     {
         return $this->hasMany(Rate::class);

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('type_id');
             $table->foreignId('category_id');
             $table->string('has_name');
+            $table->string('has_measure');
             $table->timestamps();
         });
 
