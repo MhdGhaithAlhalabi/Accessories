@@ -52,7 +52,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a href="/product" class="nav-link {{request()->path() ==  'categoryView'? 'active' : ''}}{{request()->path() ==  'categoryCreate'? 'active' : ''}}{{request()->path() ==  'productCreate'? 'active' : ''}}{{request()->path() ==  'product'? 'active' : ''}}{{request()->path() ==  'productView2' ? 'active' : ''}}{{request()->path() ==  'productView' ? 'active' : ''}}{{request()->path() ==  'typeCreate'  ? 'active' : ''}}{{request()->path() ==  'typeView' ? 'active' : ''}}">
+                    <a href="/product" class="nav-link {{request()->path() ==  'productCreate'? 'active' : ''}}{{request()->path() ==  'product'? 'active' : ''}}{{request()->path() ==  'productView' ? 'active' : ''}}{{request()->path() ==  'typeView' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                              المنتجات

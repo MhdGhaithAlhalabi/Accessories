@@ -50,8 +50,8 @@
                                 <th scope="col">الصنف</th>
                                 <th scope="col">يوجد اسم</th>
                                 <th scope="col">يوجد قياس</th>
-                                <th scope="col">الالوان</th>
-                                <th scope="col">الصور</th>
+                                <th scope="col">الالوان والصور</th>
+                                <th scope="col">اضافة لون</th>
                                 <th scope="col">التعديلات</th>
                             </tr>
                             </thead>
@@ -65,28 +65,100 @@
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->details}}</td>
                                     <td>{{$product->price}}</td>
-                                    <td>{{$product->status}}</td>
-                                    <td>{{$product->priceSale}}</td>
+                                    <td>
+                                        @if($product->status == 0)
+                                            لا يوجد عرض
+                                            @endif
+                                            @if($product->status == 1)
+                                                 يوجد عرض
+                                            @endif
+                                    </td>
+                                    <td>
+                                        @if($product->priceSale == null)
+                                            لا يوجد سعر بعد العرض
+                                            @endif
+                                            @if($product->priceSale != 0)
+                                            {{$product->priceSale}}
+                                            @endif
+                                    </td>
                                     <td>{{$product->rate}}</td>
                                     <td>{{$product->type->type_name}}</td>
                                     <td>{{$product->category->category_name}}</td>
-                                    <td>{{$product->has_name}}</td>
-                                    <td>{{$product->has_measure}}</td>
+                                    <td>
+                                        @if($product->has_name == 0)
+                                            لا يوجد اسم
+                                        @endif
+                                            @if($product->has_name == 1)
+                                                 يوجد اسم
+                                            @endif
+                                            @if($product->has_name == 2)
+                                                    يوجد اسمين
+                                            @endif
+                                    </td>
+                                    <td>
+                                        @if($product->has_measure == 0)
+                                           لا يوجد قياس
+                                        @endif
+                                            @if($product->has_measure == 1)
+                                                 يوجد قياس
+                                            @endif
+                                    </td>
                                     <td>
                                         @foreach($product->color as $color)
                                             <div class="row">
-                                                {{$color->color}}
+                                                                        اللون {{ $color->color }}
                                             </div>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <form  action="{{ route('color.delete' , $color->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" style="margin-block: 2px" class="btn btn-danger btn-block">حذف اللون</button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-sm">
+                                                    <a class="btn btn-primary btn-block" style="margin-block: 2px"  href="{{route('color.edit' ,$color->id)}}"> تعديل اللون</a>
+                                                </div>
+                                                <div class="col-sm">
+                                                    <a class="btn btn-success btn-block" style="margin-block: 2px" href="{{route('image.create' ,$color->id)}}"> اضافة صورة للون {{ $color->color }}</a>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                صور اللون {{ $color->color }}
+                                            </div>
+                                            <div class="row">
+                                                @foreach($color->image as $image)
+                                                    <div class="card" style="width: 18rem;">
+                                                        <img class="card-img-top" style="border-radius: 10px;display: block;margin-left: auto;margin-right: auto" src="{{$image->url}}" alt="Card image cap">
+                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <form  action="{{ route('image.delete' , $image->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" style="margin-block: 2px" class="btn btn-danger btn-block">حذف الصورة</button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-sm">
+                                                    <a class="btn btn-primary btn-block" style="margin-block: 2px" href="{{route('image.edit' ,$image->id)}}"> تعديل الصورة</a>
+                                                </div>
+                                            </div>
+
+                                            <hr>
                                         @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach($product->image as $image)
-                                            <div class="card" style="width: 18rem;">
-                                                <img class="card-img-top" style="border-radius: 10px;display: block;margin-left: auto;margin-right: auto" src="{{$image->url}}" alt="Card image cap">
-                                            </div>
+
                                         @endforeach
                                         <br>
                                     </td>
+<td>
+    <div class="row">
+        <div class="col-sm">
+            <a class="btn btn-success btn-block" style="margin-block: 2px" href="{{route('color.create' ,$product->id)}}"> اضافة لون</a>
+        </div>
+    </div>
+</td>
                                     <td>
                                         <div class="row">
                                             <div class="col-sm">
@@ -118,8 +190,8 @@
                                 <th scope="col">الصنف</th>
                                 <th scope="col">يوجد اسم</th>
                                 <th scope="col">يوجد قياس</th>
-                                <th scope="col">الالوان</th>
-                                <th scope="col">الصور</th>
+                                <th scope="col">الالوان والصور</th>
+                                <th scope="col">اضافة لون</th>
                                 <th scope="col">التعديلات</th>
                             </tr>
                             </tfoot>

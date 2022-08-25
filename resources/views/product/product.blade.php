@@ -28,9 +28,6 @@
                         <a class="nav-link {{'productView'== request()->path() ? 'active' :  ''}}" aria-current="page" href="{{route('product.index')}}">عرض المنتجات</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{'productView2'== request()->path() ? 'active' :  ''}}" aria-current="page" href="{{route('product.index2')}}">الالوان والصور</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link {{'productCreate'== request()->path() ? 'active' : ''}}" aria-current="page" href="{{route('product.create')}}">إنشاء منتج</a>
                     </li>
                     <li class="nav-item">

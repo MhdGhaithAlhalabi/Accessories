@@ -40,7 +40,7 @@ return new class extends Migration
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
         });
         Schema::table('images', function (Blueprint $table) {
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
         });
         Schema::table('colors', function (Blueprint $table) {
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

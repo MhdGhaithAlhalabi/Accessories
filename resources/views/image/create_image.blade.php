@@ -31,14 +31,14 @@
                     <div class="alert alert-danger">{{ $errors->first('url') }}</div>
                 @endif
                 <div class="row">
-                <label for="product_id">المنتج</label>
+                <label for="color_id">اللون</label>
                 <label>
-                <select class="form-control" name="product_id" aria-label="Default select example">
-                    <option  value="{{$products->id}}">{{$products->name}}</option>
+                <select class="form-control" name="color_id" aria-label="Default select example">
+                    <option  value="{{$colors->id}}">{{$colors->color}}</option>
                 </select>
                 </label>
-            @if($errors->has('product_id'))
-                    <div class="alert alert-danger">{{ $errors->first('product_id') }}</div>
+            @if($errors->has('color_id'))
+                    <div class="alert alert-danger">{{ $errors->first('color_id') }}</div>
                 @endif
                 </div>
                 @if(session()->has('message'))

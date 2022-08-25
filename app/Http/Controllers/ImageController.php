@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -29,8 +30,8 @@ class ImageController extends Controller
     {
         $collct = collect($request->all());
         $num = $collct->keys();
-        $products = Product::find($num)->first();
-        return view('image.create_image',compact('products'));
+         $colors = Color::find($num)->first();
+        return view('image.create_image',compact('colors'));
     }
 
     /**
@@ -43,7 +44,8 @@ class ImageController extends Controller
     {
         $rules = [
             'url' => ['required', 'string', 'url'],
-            'product_id'=>['required']        ];
+            'color_id'=>['required']
+        ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
@@ -52,15 +54,15 @@ class ImageController extends Controller
         $validator = Validator::make($request->all(),$rules,$customMessages);
 
         if ($validator->fails()) {
-            return redirect()->route('image.create',$request->product_id)->withErrors($validator);
+            return redirect()->route('image.create',$request->color_id)->withErrors($validator);
         }
 
         $image = Image::create([
             'url' => $request->url,
-            'product_id'=>$request->product_id
+            'color_id'=>$request->color_id
         ]);
 
-        return redirect()->route('image.create',$request->product_id)->with('message','تم اضافة الصورة');
+        return redirect()->route('image.create',$request->color_id)->with('message','تم اضافة الصورة');
     }
 
     /**
@@ -82,10 +84,9 @@ class ImageController extends Controller
      */
     public function edit(image $image)
     {
-        $collct = collect($image->product_id);
-
-        $product = Product::find($collct)->first();
-        return view('image.edit_image',compact('image','product'));
+        $collct = collect($image->color_id);
+        $color = Color::find($collct)->first();
+        return view('image.edit_image',compact('image','color'));
     }
 
     /**
@@ -99,7 +100,7 @@ class ImageController extends Controller
     {
         $rules = [
             'url' => ['required', 'string', 'url'],
-            'product_id'=>['required']        ];
+            'color_id'=>['required']        ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',

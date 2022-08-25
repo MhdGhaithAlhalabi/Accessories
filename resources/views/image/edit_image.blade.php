@@ -29,9 +29,9 @@
         @if($errors->has('url'))
             <div class="alert alert-danger">{{ $errors->first('url') }}</div>
         @endif
-      <input type="hidden" name="product_id" value="{{$product->id}}">
-        @if($errors->has('product_id'))
-            <div class="alert alert-danger">{{ $errors->first('product_id') }}</div>
+      <input type="hidden" name="color_id" value="{{$color->id}}">
+        @if($errors->has('color_id'))
+            <div class="alert alert-danger">{{ $errors->first('color_id') }}</div>
         @endif
         @if(session()->has('message'))
             <div class="alert alert-success">

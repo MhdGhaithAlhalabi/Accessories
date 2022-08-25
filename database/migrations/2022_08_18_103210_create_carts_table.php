@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('customer_id');
             $table->float('amount');
             $table->text('status')->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
         });
     }

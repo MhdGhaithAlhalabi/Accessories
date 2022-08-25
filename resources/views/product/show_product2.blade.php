@@ -44,7 +44,6 @@
                                 <th scope="col">النوع</th>
                                 <th scope="col">الصنف</th>
                                 <th scope="col">الالوان</th>
-                                <th scope="col">الصور</th>
                                 <th scope="col">التعديلات</th>
                             </tr>
                             </thead>
@@ -74,43 +73,48 @@
                                                 <div class="col-sm">
                                                     <a class="btn btn-primary btn-block" style="margin-block: 2px"  href="{{route('color.edit' ,$color->id)}}"> تعديل اللون</a>
                                                 </div>
+                                                    <div class="col-sm">
+                                                        <a class="btn btn-success btn-block" style="margin-block: 2px" href="{{route('image.create' ,$color->id)}}"> اضافة صورة</a>
+                                                    </div>
+
                                             </div>
+                                        <div class="row">
+                                            الصور
+                                        </div>
+                                            <div class="row">
+                                                @foreach($color->image as $image)
+                                                    <div class="card" style="width: 18rem;">
+                                                        <img class="card-img-top" style="border-radius: 10px;display: block;margin-left: auto;margin-right: auto" src="{{$image->url}}" alt="Card image cap">
+                                                    </div>
+                                            </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            <form  action="{{ route('image.delete' , $image->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" style="margin-block: 2px" class="btn btn-danger btn-block">حذف الصورة</button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <a class="btn btn-primary btn-block" style="margin-block: 2px" href="{{route('image.edit' ,$image->id)}}"> تعديل الصورة</a>
+                                                        </div>
+                                                    </div>
+
+                                                    <br>
+                                                @endforeach
+
                                         @endforeach
                                             <br>
 
                                     </td>
+
                                     <td>
-                                        @foreach($product->image as $image)
-                                            <div class="card" style="width: 18rem;">
-                                                <img class="card-img-top" style="border-radius: 10px;display: block;margin-left: auto;margin-right: auto" src="{{$image->url}}" alt="Card image cap">
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm">
-                                                    <form  action="{{ route('image.delete' , $image->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" style="margin-block: 2px" class="btn btn-danger btn-block">حذف الصورة</button>
-                                                    </form>
-                                                </div>
-                                                <div class="col-sm">
-                                                    <a class="btn btn-primary btn-block" style="margin-block: 2px" href="{{route('image.edit' ,$image->id)}}"> تعديل الصورة</a>
-                                                </div>
-                                            </div>
-                                            <br>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-sm">
-                                                <a class="btn btn-success btn-block" style="margin-block: 2px" href="{{route('image.create' ,$product->id)}}"> اضافة صورة</a>
-                                            </div>
-                                        </div>
+
 
                                         <div class="row">
                                         <div class="col-sm">
                                                 <a class="btn btn-success btn-block" style="margin-block: 2px" href="{{route('color.create' ,$product->id)}}"> اضافة لون</a>
                                             </div>
-                                        </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -123,7 +127,6 @@
                                 <th scope="col">النوع</th>
                                 <th scope="col">الصنف</th>
                                 <th scope="col">الالوان</th>
-                                <th scope="col">الصور</th>
                                 <th scope="col">التعديلات</th>
                             </tr>
                             </tfoot>

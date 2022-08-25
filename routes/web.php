@@ -83,9 +83,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/colorEdit/{color}', [ColorController::class, 'edit'])->name('color.edit');
     Route::post('/colorEdit/{color}', [ColorController::class, 'update'])->name('color.update');
     Route::delete('/colorDelete/{color}', [ColorController::class, 'destroy'])->name('color.delete');
+    //MENU CONTROLLER
+    Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+    Route::post('/menuStore', [MenuController::class, 'store'])->name('menu.store');
+    Route::delete('/menuDelete/{menu}', [MenuController::class, 'destroy'])->name('menu.delete');
+    //CUSTOMER CONTROLLER
+    Route::get('/customerView', [CustomerController::class, 'index'])->name('customer.index');
     //CART CONTROLLER
     Route::get('/cartView', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cartDone/{id}', [CartController::class, 'cartDone'])->name('cart.done');
+    Route::post('/cartDone/{cart}', [CartController::class, 'cartDone'])->name('cart.done');
     Route::get('/cartDoneView', [CartController::class, 'cartDoneView'])->name('cart.done.index');
     Route::get('/monthlyReport', [CartController::class, 'monthlyReport'])->name('monthlyReport');
     Route::get('/dailyReport', [CartController::class, 'dailyReport'])->name('dailyReport');
@@ -93,15 +99,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rateView', [RateController::class, 'index']);
     Route::get('/rateCustomView/{id}', [RateController::class, 'show']);
     //FEEDBACK CONTROLLER
-    Route::get('/feedbackView', [FeedbackController::class, 'index']);
-    Route::get('/feedbackReadView', [FeedbackController::class, 'index2']);
-    Route::post('/feedbackRead/{id}', [FeedbackController::class, 'feedbackRead']);
-    //MENU CONTROLLER
-    Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
-    Route::post('/menuStore', [MenuController::class, 'store'])->name('menu.store');
-    Route::delete('/menuDelete/{menu}', [MenuController::class, 'destroy'])->name('menu.delete');
-    //CUSTOMER CONTROLLER
-    Route::get('/customerView', [CustomerController::class, 'index'])->name('customer-index');
+    Route::get('/feedbackView', [FeedbackController::class, 'index'])->name('feedbackView.index');
+    Route::get('/feedbackReadView', [FeedbackController::class, 'index2'])->name('feedbackReadView.index');
+    Route::post('/feedbackRead/{feedback}', [FeedbackController::class, 'feedbackRead'])->name('feedback.read');
 });
 
 require __DIR__.'/auth.php';
