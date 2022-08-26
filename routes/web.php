@@ -29,14 +29,14 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    }
-    )->name('dashboard');
-
+        Route::get('/dashboard',[ProductController::class, 'dashboardIndex'] )->name('dashboard');
+Route::get('/getMessage',[ProductController::class, 'getMessage'])->name('getMessage');
 
     Route::get('/product', function () {
         return view('product.product');
+    });
+    Route::get('/feedback', function () {
+        return view('feedback.feedback');
     });
     Route::get('/menu', function () {
         return view('menu.menu');
@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');
     Route::delete('/customerDelete/{customer}', [CustomerController::class, 'destroy'])->name('customer.delete');
 
+
     //CART CONTROLLER
     Route::get('/cartView', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cartDone/{cart}', [CartController::class, 'cartDone'])->name('cart.done');
@@ -104,6 +105,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/feedbackView', [FeedbackController::class, 'index'])->name('feedbackView.index');
     Route::get('/feedbackReadView', [FeedbackController::class, 'index2'])->name('feedbackReadView.index');
     Route::post('/feedbackRead/{feedback}', [FeedbackController::class, 'feedbackRead'])->name('feedback.read');
+    Route::delete('/feedbackDelete/{feedback}', [FeedbackController::class, 'destroy'])->name('feedback.delete');
+
 });
 
 require __DIR__.'/auth.php';

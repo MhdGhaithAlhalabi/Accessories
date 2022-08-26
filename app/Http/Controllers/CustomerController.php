@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Menu;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use function Symfony\Component\Console\Style\comment;
 
@@ -18,7 +20,14 @@ class CustomerController extends Controller
         $customers = Customer::all();
         return view('customer.customer',compact('customers'));
     }
-
+    public function menu()
+    {
+        $menu_product_id = Menu::all()->pluck('product_id')->values();
+        $menu = Product::with('type','category','color','color.image')
+            ->whereIn('id', $menu_product_id)
+            ->get();
+        return ['menu' => $menu];
+    }
     /**
      * Show the form for creating a new resource.
      *

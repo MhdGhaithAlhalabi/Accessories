@@ -23,16 +23,16 @@
 
         <!-- Messages Dropdown Menu -->
         <li class="nav-item">
-            <a class="nav-link"  href="#">
+            <a class="nav-link"  href="/feedbackView">
                 <i class="far fa-comments"></i>
-                <span class="badge badge-danger navbar-badge">1</span>
+                <span class="badge badge-danger navbar-badge" id="message"></span>
             </a>
         </li>
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">1</span>
+                <span class="badge badge-warning navbar-badge"></span>
             </a>
         </li>
         <li class="nav-item">

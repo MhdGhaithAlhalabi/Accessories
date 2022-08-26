@@ -37,6 +37,25 @@
 <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
 
 
+<script type="text/javascript">
+    $(document).ready(function() {
+            $.ajax({
+                type: 'get',
+                url: '{!! URL::to('getMessage')!!}',
+                data: {
+                },
+                success: function(data) {
+                    //console.log(data);
+
+                    $('#message').html('');
+                    $('#message').append(data);
+                },
+                error: function() {
+
+                }
+            });
+        });
+</script>
 
 
 

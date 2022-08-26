@@ -68,7 +68,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{request()->path() ==  'feedback'? 'active' : ''}}">
+                    <a href="/feedback" class="nav-link {{request()->path() ==  'feedback'? 'active' : ''}}">
                         <i class="nav-icon fa fa-paper-plane" aria-hidden="true"></i>
                         <p>
                             رسائل التواصل

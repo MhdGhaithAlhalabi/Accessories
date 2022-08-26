@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Feedback;
 use App\Models\Product;
 use App\Models\Type;
 use Illuminate\Http\Request;
@@ -20,6 +21,16 @@ class ProductController extends Controller
         $products = Product::with('type','category')->get();
         return view('product.show_product')->with('products',$products);
     }
+    public function dashboardIndex()
+    {
+        return view('dashboard')->with('messages');
+    }
+    public function getMessage(){
+        $feedback = Feedback::where('status', '=', '0')->get();
+        $message = $feedback->count();
+        return $message;
+    }
+
     public function index2()
     {
         $products = Product::with('type','category')->get();
