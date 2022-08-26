@@ -70,7 +70,7 @@
                                             <form  action="{{ route('feedback.read' , $feedback->id) }}" method="POST">
                                                 @csrf
                                                 @method('post')
-                                                <button type="submit" style="margin-block: 2px" class="btn btn-danger btn-block">قراءة</button>
+                                                <button type="submit" style="margin-block: 2px" class="btn btn-success btn-block">قراءة</button>
                                             </form>
                                         </div>
                                     </div>
@@ -83,6 +83,7 @@
                             <th>#</th>
                             <th>الاسم</th>
                             <th>رقم الموبايل</th>
+                            <th>المدينة</th>
                             <th>الرسالة</th>
                             <th>التاريخ</th>
                             <th>تعيين كمقروء</th>

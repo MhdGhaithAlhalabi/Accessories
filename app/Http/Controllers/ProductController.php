@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Feedback;
 use App\Models\Product;
@@ -23,13 +24,23 @@ class ProductController extends Controller
     }
     public function dashboardIndex()
     {
-        return view('dashboard')->with('messages');
+        $carts = Cart::where('status','=','waiting')->get();
+        $carts2 = Cart::where('status','=','done')->get();
+        return view('cart.cart')->with('carts',$carts)->with('carts2',$carts2);
     }
     public function getMessage(){
         $feedback = Feedback::where('status', '=', '0')->get();
         $message = $feedback->count();
         return $message;
     }
+    public function getCart(){
+
+        $carts = Cart::where('status', '=', 'waiting')->get();
+        $cart = $carts->count();
+        return $cart;
+
+    }
+
 
     public function index2()
     {
@@ -40,7 +51,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {

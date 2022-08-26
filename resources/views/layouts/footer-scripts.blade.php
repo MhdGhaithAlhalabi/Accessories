@@ -54,6 +54,21 @@
 
                 }
             });
+        $.ajax({
+            type: 'get',
+            url: '{!! URL::to('getCart')!!}',
+            data: {
+            },
+            success: function(data) {
+                //console.log(data);
+
+                $('#cart').html('');
+                $('#cart').append(data);
+            },
+            error: function() {
+
+            }
+        });
         });
 </script>
 

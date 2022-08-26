@@ -20,7 +20,7 @@
 @endsection
 
 @section('content')
-    اهلاً بك
+
 @endsection
 
 @section('script')

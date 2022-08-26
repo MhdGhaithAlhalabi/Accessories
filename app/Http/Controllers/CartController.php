@@ -23,6 +23,14 @@ class CartController extends Controller
 
         return $carts;
     }
+    public function cartDone(Cart $cart)
+    {
+            $cart->status = 'done';
+            $cart->save();
+
+        return redirect()->route('dashboard')->with('message','تمت التعيين كجاهزة');
+
+    }
     public function index2($customer_id)
     {
         $carts = Cart::with('order:cart_id,qty,product_id',
@@ -93,10 +101,12 @@ class CartController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Cart $cart)
     {
-        //
+        $cart->delete();
+        return redirect()->route('dashboard')
+            ->with('message','تم حذف الطلب');
     }
 }

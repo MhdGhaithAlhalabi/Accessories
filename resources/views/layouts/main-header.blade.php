@@ -29,12 +29,14 @@
             </a>
         </li>
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
+        <li class="nav-item">
+            <a class="nav-link"  href="/dashboard">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge"></span>
+                <span class="badge badge-warning navbar-badge" id="cart"></span>
             </a>
         </li>
+        <!-- fullscreen -->
+
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>

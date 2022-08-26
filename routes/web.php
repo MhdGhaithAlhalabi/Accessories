@@ -31,6 +31,8 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard',[ProductController::class, 'dashboardIndex'] )->name('dashboard');
 Route::get('/getMessage',[ProductController::class, 'getMessage'])->name('getMessage');
+    Route::get('/getCart',[ProductController::class, 'getCart'])->name('getCart');
+
 
     Route::get('/product', function () {
         return view('product.product');
@@ -95,7 +97,8 @@ Route::middleware(['auth'])->group(function () {
     //CART CONTROLLER
     Route::get('/cartView', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cartDone/{cart}', [CartController::class, 'cartDone'])->name('cart.done');
-    Route::get('/cartDoneView', [CartController::class, 'cartDoneView'])->name('cart.done.index');
+    Route::delete('/cartDelete/{cart}', [CartController::class, 'destroy'])->name('cart.delete');
+    //Route::get('/cartDoneView', [CartController::class, 'cartDoneView'])->name('cart.done.index');
     Route::get('/monthlyReport', [CartController::class, 'monthlyReport'])->name('monthlyReport');
     Route::get('/dailyReport', [CartController::class, 'dailyReport'])->name('dailyReport');
     //RATE CONTROLLER
