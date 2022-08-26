@@ -88,7 +88,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/menuStore', [MenuController::class, 'store'])->name('menu.store');
     Route::delete('/menuDelete/{menu}', [MenuController::class, 'destroy'])->name('menu.delete');
     //CUSTOMER CONTROLLER
-    Route::get('/customerView', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');
+    Route::delete('/customerDelete/{customer}', [CustomerController::class, 'destroy'])->name('customer.delete');
+
     //CART CONTROLLER
     Route::get('/cartView', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cartDone/{cart}', [CartController::class, 'cartDone'])->name('cart.done');

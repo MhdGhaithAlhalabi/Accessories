@@ -42,7 +42,7 @@
                         </p>
                     </a>
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{request()->path() ==  'customers'? 'active' : ''}}">
+                    <a href="/customers" class="nav-link {{request()->path() ==  'customers'? 'active' : ''}}">
                         <i class="nav-icon fa fa-address-card" aria-hidden="true"></i>
                         <p>
                             الزبائن
