@@ -11,12 +11,28 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public function index()
     {
-        return Auth::user();
+        $carts = Cart::with('order:cart_id,qty,product_id',
+            'order.product:id,name',
+            'customer:id,name,phone')
+            ->where('status', '=', 'waiting')->get();
+
+
+        return $carts;
     }
+    public function index2($customer_id)
+    {
+        $carts = Cart::with('order:cart_id,qty,product_id',
+            'order.product:id,name,details,price,priceSale,status,rate,type_id',
+            'order.product.type:id,type_name')
+            ->where('customer_id', '=', $customer_id)
+            ->latest()->get();
+        return $carts;
+    }
+
 
     /**
      * Show the form for creating a new resource.

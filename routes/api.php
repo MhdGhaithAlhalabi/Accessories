@@ -30,13 +30,12 @@ Route::group(['prefix' => 'customer','namespace'=>'Customer'],function () {
 //FEEDBACK CONTROLLER
     Route::post('/feedbackStore', [FeedbackController::class, 'store'])->middleware(['auth:customer-api']);//flutter
 //CUSTOMER CONTROLLER
-Route::get('/menu', [CustomerController::class, 'menu'])->middleware(['auth:customer-api']);//flutter
+    Route::get('/menu', [CustomerController::class, 'menu'])->middleware(['auth:customer-api']);//flutter
 //ORDER CONTROLLER
-Route::post('/orderStore', [OrderController::class, 'Store'])->middleware(['auth:customer-api']);//flutter
+    Route::post('/orderStore', [OrderController::class, 'Store'])->middleware(['auth:customer-api']);//flutter
 //CART CONTROLLER
-Route::get('/orderCustomerView', [CartController::class, 'index'])->middleware(['auth:customer-api']);//flutter
-
+    Route::get('/orderCustomerView/{customer_id}', [CartController::class, 'index2']);//flutter
 //RATE CONTROLLER
-Route::get('/rateView/{id}', [RateController::class, 'show'])->middleware(['auth:customer-api']);//flutter
-Route::post('/rateStore', [RateController::class, 'store'])->middleware(['auth:customer-api']);//flutter
+    Route::get('/rateView/{id}', [RateController::class, 'show'])->middleware(['auth:customer-api']);//flutter
+    Route::post('/rateStore', [RateController::class, 'store'])->middleware(['auth:customer-api']);//flutter
 });
