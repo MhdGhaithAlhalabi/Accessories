@@ -78,8 +78,6 @@ class ProductController extends Controller
             'type_id'=>['required'],
             'has_name'=>['required'],
             'has_measure'=>['required'],
-
-
         ];
 
         $customMessages = [

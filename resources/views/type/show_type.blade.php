@@ -56,7 +56,7 @@
                         <div class="alert alert-danger">{{ $errors->first('type_name') }}</div>
                     @endif
                 </div>
-                    <div class="form-group">
+                  {{--  <div class="form-group">
                         <label for="type_image">الصورة</label>
                         <label>
                             <input type="text" name="type_image" class="form-control" placeholder="الصورة">
@@ -64,7 +64,7 @@
                         @if($errors->has('type_image'))
                             <div class="alert alert-danger">{{ $errors->first('type_image') }}</div>
                         @endif
-                </div>
+                </div>--}}
                 <button type="submit" style="margin-block: 2px" class="btn btn-success btn-block">موافق</button>
             </form>
 
@@ -141,7 +141,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>الاسم</th>
-                                <th>الصورة</th>
+                              {{--  <th>الصورة</th>--}}
                                 <th>التعديلات</th>
                             </tr>
                             </thead>
@@ -153,11 +153,11 @@
                                 <tr>
                                     <th>{{++$i}}</th>
                                     <td>{{$type->type_name}}</td>
-                                    <td>
+                                   {{-- <td>
                                         <div class="card" style="width: 18rem;">
                                             <img class="card-img-top" style="border-radius: 10px;display: block;margin-left: auto;margin-right: auto" src="{{$type->type_image}}" alt="Card image cap">
                                         </div>
-                                    </td>
+                                    </td>--}}
 
 
                                     <td>
@@ -184,7 +184,7 @@
                     <tr>
                         <th>#</th>
                         <th>الاسم</th>
-                        <th>الصورة</th>
+                   {{--     <th>الصورة</th>--}}
                         <th>التعديلات</th>
                     </tr>
                     </tfoot>

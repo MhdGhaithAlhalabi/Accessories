@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->id();
             $table->string('type_name')->unique();
-            $table->longText('type_image');
+           // $table->longText('type_image');
             $table->timestamps();
         });
 

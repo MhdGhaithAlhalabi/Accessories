@@ -213,10 +213,12 @@
                                                 @if($order->product->status == 0)
                                                     لا يوجد عرض
                                                 @endif
-                                                {{ $order->product->status }}
+                                                @if($order->product->status == 1)
+                                                    يوجد عرض
+                                                @endif
                                             </div>
                                             <div class="row">
-                                                حالة العرض:
+                                                السعر بعد العرض:
                                                 @if($order->product->priceSale == null)
                                                     لا يوجد سعر عرض
                                                 @endif

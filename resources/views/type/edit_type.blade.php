@@ -31,7 +31,7 @@
         @endif
 
     </div>
-    <div class="form-group">
+   {{-- <div class="form-group">
         <label for="name">type_image</label>
         <label>
             <input type="text" name="type_image" value="{{$type->type_image}}" class="form-control" placeholder="الصورة">
@@ -40,7 +40,7 @@
             <div class="alert alert-danger">{{ $errors->first('type_image') }}</div>
         @endif
 
-    </div>
+    </div>--}}
     @if(session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}

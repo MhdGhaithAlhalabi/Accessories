@@ -41,7 +41,7 @@ class TypeController extends Controller
     {
         $rules = [
             'type_name' => ['required', 'string', 'max:255', 'unique:types'],
-            'type_image' => ['required','url']
+           // 'type_image' => ['required','url']
         ];
 
         $customMessages = [
@@ -57,7 +57,7 @@ class TypeController extends Controller
 
         $product = Type::create([
             'type_name' => $request->type_name,
-            'type_image' => $request->type_image,
+         //   'type_image' => $request->type_image,
 
         ]);
 
@@ -97,7 +97,7 @@ class TypeController extends Controller
     {
         $rules = [
             'type_name' => ['required', 'string', 'max:255','unique:types,type_name,'.$type->id],
-            'type_image' => ['required','url']
+         //   'type_image' => ['required','url']
         ];
 
         $customMessages = [
