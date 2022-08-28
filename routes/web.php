@@ -96,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
 
     //CART CONTROLLER
     Route::get('/cartView', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/cartView/{cart}', [CartController::class, 'cartView'])->name('cart.cartView');
     Route::post('/cartDone/{cart}', [CartController::class, 'cartDone'])->name('cart.done');
     Route::delete('/cartDelete/{cart}', [CartController::class, 'destroy'])->name('cart.delete');
     //Route::get('/cartDoneView', [CartController::class, 'cartDoneView'])->name('cart.done.index');

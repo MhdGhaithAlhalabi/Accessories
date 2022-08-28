@@ -23,6 +23,9 @@ class CartController extends Controller
 
         return $carts;
     }
+    public function cartView(Cart $cart){
+        return view('cart.cart_view',compact('cart'));
+    }
     public function cartDone(Cart $cart)
     {
             $cart->status = 'done';
