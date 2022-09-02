@@ -106,7 +106,11 @@
                                     <td>
                                         @foreach($product->color as $color)
                                             <div class="row">
-                                                                        اللون {{ $color->color }}
+                                                <svg xmlns="http://www.w3.org/2000/svg" style="width: 2rem; margin: 5px">
+                                                    <circle cx="15" cy="15" r="15" fill="{{$color->color_hex}}" />
+                                                </svg>
+                                                اللون
+                                                {{ $color->color }}
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm">

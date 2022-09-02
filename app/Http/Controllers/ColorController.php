@@ -43,7 +43,9 @@ class ColorController extends Controller
     {
         $rules = [
             'color' => ['required', 'string', 'max:255'],
-            'product_id'=>['required']      ];
+            'product_id'=>'required',
+            'color_hex'=>'required'
+        ];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
@@ -57,7 +59,8 @@ class ColorController extends Controller
 
         $color = Color::create([
             'color' => $request->color,
-            'product_id'=>$request->product_id
+            'product_id'=>$request->product_id,
+            'color_hex'=>$request->color_hex
         ]);
 
         return redirect()->route('color.create',$request->product_id)->with('message','تم اضافة اللون');
