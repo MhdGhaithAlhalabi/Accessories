@@ -67,16 +67,7 @@ class CategoryController extends Controller
         return redirect()->route('type.index')->with('message','تمت اضافة الصنف');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

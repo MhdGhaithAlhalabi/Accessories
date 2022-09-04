@@ -28,20 +28,6 @@ class MenuController extends Controller
     }
 
 
-    public function outOfMenu()
-    {
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -71,36 +57,8 @@ class MenuController extends Controller
         return redirect()->route('menu.index')->with('message','تمت اضافة المنتج للقائمة اليومية');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Menu $menu
-     */
-    public function show(Menu $menu)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Menu $menu
-     */
-    public function edit(Menu $menu)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Menu $menu
-     */
-    public function update(Request $request, Menu $menu)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

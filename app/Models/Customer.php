@@ -7,6 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @method static create(array $array)
+ * @method static findOrFail($customer_id)
+ */
 class Customer extends Authenticatable  implements JWTSubject
 {
     use HasFactory, Notifiable;

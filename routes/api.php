@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\Customer\AuthController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\Api\Customer\CustomerController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RateController;
@@ -28,28 +28,24 @@ Route::group(['prefix' => 'customer','namespace'=>'Customer'],function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
     Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:customer-api']);
+    Route::post('editProfile', [AuthController::class, 'editProfile'])->middleware(['auth:customer-api']);
+
 });
 
 
 ///////////////////////////////customer api////////////////////////////////
 Route::group(['prefix' => 'customer','namespace'=>'Customer','middleware'=>'auth:customer-api'],function () {
 ///////////////////////////////flutter api////////////////////////////////
-//FEEDBACK CONTROLLER
-    Route::post('/feedbackStore', [FeedbackController::class, 'store']);//flutter
-//CUSTOMER CONTROLLER
+    //Api \ Customer \ CustomerController
+    Route::post('/feedbackStore', [CustomerController::class, 'feedbackStore']);//flutter
     Route::get('/menu', [CustomerController::class, 'menu']);//flutter
-//ORDER CONTROLLER
-    Route::post('/orderStore', [OrderController::class, 'Store']);//flutter
-//CART CONTROLLER
-    Route::get('/orderCustomerView/{customer_id}', [CartController::class, 'index2']);//flutter
-//RATE CONTROLLER
-    Route::get('/rateView/{id}', [RateController::class, 'show']);//flutter
-    Route::post('/rateStore', [RateController::class, 'store']);//flutter
-//TYPE CONTROLLER
-    Route::get('/typeView', [TypeController::class, 'typeView']);//flutter
-    Route::get('/categoryView/{id}', [TypeController::class, 'categoryView']);//flutter
-    Route::get('/productView/{type_id}/{category_id}', [TypeController::class, 'productView']);//flutter
-    Route::get('/offerView', [TypeController::class, 'offerView']);//flutter
-    Route::post('/searchByName', [TypeController::class, 'searchByName']);//flutter
+    Route::post('/orderStore', [CustomerController::class, 'orderStore']);//flutter
+    Route::get('/orderCustomerView/{customer_id}', [CustomerController::class, 'orderCustomerView']);//flutter
+    Route::post('/rateStore', [CustomerController::class, 'rateStore']);//flutter
+    Route::get('/typeView', [CustomerController::class, 'typeView']);//flutter
+    Route::get('/categoryView/{id}', [CustomerController::class, 'categoryView']);//flutter
+    Route::get('/productView/{type_id}/{category_id}', [CustomerController::class, 'productView']);//flutter
+    Route::get('/offerView', [CustomerController::class, 'offerView']);//flutter
+    Route::post('/searchByName', [CustomerController::class, 'searchByName']);//flutter
 
 });

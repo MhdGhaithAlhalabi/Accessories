@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Customer;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Traits\GeneralTrait;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -34,8 +35,7 @@ class AuthController extends Controller
             $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
-                $code = $this->returnCodeAccordingToInput($validator);
-                return $this->returnValidationError($code, $validator);
+                return $this->returnValidationError( $validator->getMessageBag());
             }
 
             //login
@@ -45,15 +45,15 @@ class AuthController extends Controller
             $token = Auth::guard('customer-api')->attempt($credentials);
 
             if (!$token)
-                return $this->returnError('E001', 'بيانات الدخول غير صحيحة');
+                return $this->returnError( 'بيانات الدخول غير صحيحة');
 
            // $customer = Auth::guard('customer-api')->user();
           //  $customer->api_token = $token;
             //return token
-            return $this->returnData('customer', $token);
+            return $this->returnData('token', $token);
 
-        } catch (\Exception $ex) {
-            return $this->returnError($ex->getCode(), $ex->getMessage());
+        } catch (Exception $ex) {
+            return $this->returnError($ex->getMessage());
         }
 
 
@@ -68,8 +68,7 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 if($validator->fails()){
-    $code = $this->returnCodeAccordingToInput($validator);
-    return $this->returnValidationError($code, $validator);
+    return $this->returnValidationError( $validator->getMessageBag());
 }
         $customer = Customer::create([
             'name' => $request->name,
@@ -89,7 +88,29 @@ if($validator->fails()){
             ]
         ]);
     }
+    public function editProfile(Request $request){
+        $rules = [
+            'name' => ['required','string','max:255'],
+            'city'=>['required']
+        ];
 
+        $validator = Validator::make($request->all(), $rules);
+if($validator->fails()){
+    return $this->returnValidationError( $validator->getMessageBag());
+                }
+        $customer = Customer::findOrFail($request->customer_id);
+        $customer->update($request->all());
+
+
+        return $this->returnSuccessMessage('User edit successfully');
+    }
+
+    public function destroy(Request $request){
+        $customer = Customer::findOrFail($request->customer_id);
+        $customer->delete();
+       return $this->returnSuccessMessage('customer deleted');
+
+    }
 
     public function me()
     {

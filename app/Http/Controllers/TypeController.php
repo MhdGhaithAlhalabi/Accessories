@@ -6,11 +6,13 @@ use App\Models\Category;
 use App\Models\Menu;
 use App\Models\Product;
 use App\Models\Type;
+use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class TypeController extends Controller
 {
+    use GeneralTrait;
     /**
      * Display a listing of the resource.
      *
@@ -22,36 +24,7 @@ class TypeController extends Controller
         $categories = Category::with('type')->get();
         return view('type.show_type',compact('types','categories'));
     }
-    public function typeView(){
-        $types = Type::select('id','type_name')->get();
-        return $types;
-    }
-    public function categoryView($id){
-        $category = Category::select('id','category_name','type_id','category_image')->where('type_id','=',$id)->get();
-        return $category;
-    }
-    public function productView($type_id,$category_id){
-        $menu_product_id = Menu::all()->pluck('product_id')->values();
-        $product = Product::all()->where('type_id','=',$type_id)
-        ->where('category_id','=',$category_id)
-        ->whereIn('id',$menu_product_id) ;
-        return $product;
-    }
-    public function offerView(){
-        $menu_product_id = Menu::all()->pluck('product_id')->values();
-        $product = Product::with('type:id,type_name','category:id,category_name,type_id,category_image','color:id,color,product_id,color_hex','color.image:id,url,color_id')
-        ->where('status','=','1')
-        ->whereIn('id',$menu_product_id)->get() ;
-        return $product;
-    }
-    public function searchByName(Request $request){
-        $name = $request->name;
-        $menu_product_id = Menu::all()->pluck('product_id')->values();
-        $product = Product::with('type:id,type_name','category:id,category_name,type_id,category_image','color:id,color,product_id,color_hex','color.image:id,url,color_id')
-        ->where('name','like',"%{$name}%")
-        ->whereIn('id',$menu_product_id)->get() ;
-        return $product;
-    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -72,7 +45,6 @@ class TypeController extends Controller
     {
         $rules = [
             'type_name' => ['required', 'string', 'max:255', 'unique:types'],
-           // 'type_image' => ['required','url']
         ];
 
         $customMessages = [
@@ -88,23 +60,13 @@ class TypeController extends Controller
 
         $product = Type::create([
             'type_name' => $request->type_name,
-         //   'type_image' => $request->type_image,
 
         ]);
 
         return redirect()->route('type.index')->with('message','تمت اضافة النوع');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Type  $type
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Type $type)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -128,7 +90,6 @@ class TypeController extends Controller
     {
         $rules = [
             'type_name' => ['required', 'string', 'max:255','unique:types,type_name,'.$type->id],
-         //   'type_image' => ['required','url']
         ];
 
         $customMessages = [

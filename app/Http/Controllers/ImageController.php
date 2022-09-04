@@ -65,16 +65,7 @@ class ImageController extends Controller
         return redirect()->route('image.create',$request->color_id)->with('message','تم اضافة الصورة');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\image  $image
-     * @return \Illuminate\Http\Response
-     */
-    public function show(image $image)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

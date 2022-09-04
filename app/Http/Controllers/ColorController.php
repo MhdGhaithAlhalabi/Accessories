@@ -66,16 +66,7 @@ class ColorController extends Controller
         return redirect()->route('color.create',$request->product_id)->with('message','تم اضافة اللون');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\color  $color
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Color $color)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

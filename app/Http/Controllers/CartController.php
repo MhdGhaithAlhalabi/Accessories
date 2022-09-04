@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    use GeneralTrait;
     /**
      * Display a listing of the resource.
      *
@@ -33,74 +35,6 @@ class CartController extends Controller
 
         return redirect()->route('dashboard')->with('message','تمت التعيين كجاهزة');
 
-    }
-    public function index2($customer_id)
-    {
-        $carts = Cart::with('order:cart_id,qty,product_id,color,has_name,has_measure',
-            'order.product:id,name,details,price,priceSale,status,rate,type_id,category_id,has_name,has_measure',
-            'order.product.type:id,type_name',
-            'order.product.category:id,type_id,category_name,category_image',
-            'order.product.color:id,color,product_id,color_hex',
-            'order.product.color.image:id,url,color_id')
-            ->where('customer_id', '=', $customer_id)
-            ->latest()->get();
-        return $carts;
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
     }
 
     /**

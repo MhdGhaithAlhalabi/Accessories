@@ -110,16 +110,7 @@ class ProductController extends Controller
         return redirect()->route('product.create')->with('message','تمت اضافة المنتج بنجاح');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
