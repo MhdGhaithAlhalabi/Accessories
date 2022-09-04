@@ -36,9 +36,12 @@ class CartController extends Controller
     }
     public function index2($customer_id)
     {
-        $carts = Cart::with('order:cart_id,qty,product_id',
-            'order.product:id,name,details,price,priceSale,status,rate,type_id',
-            'order.product.type:id,type_name')
+        $carts = Cart::with('order:cart_id,qty,product_id,color,has_name,has_measure',
+            'order.product:id,name,details,price,priceSale,status,rate,type_id,category_id,has_name,has_measure',
+            'order.product.type:id,type_name',
+            'order.product.category:id,type_id,category_name,category_image',
+            'order.product.color:id,color,product_id,color_hex',
+            'order.product.color.image:id,url,color_id')
             ->where('customer_id', '=', $customer_id)
             ->latest()->get();
         return $carts;

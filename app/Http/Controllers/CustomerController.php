@@ -23,7 +23,7 @@ class CustomerController extends Controller
     public function menu()
     {
         $menu_product_id = Menu::all()->pluck('product_id')->values();
-        $menu = Product::with('type','category','color','color.image')
+        $menu = Product::with('type:id,type_name','category:id,category_name,type_id,category_image','color:id,color,product_id,color_hex','color.image:id,url,color_id')
             ->whereIn('id', $menu_product_id)
             ->get();
         return ['menu' => $menu];
