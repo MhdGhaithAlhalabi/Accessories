@@ -5,6 +5,7 @@
 @endsection
 
 @section('css')
+
 @endsection
 
 @section('page_name')
@@ -21,27 +22,38 @@
 
 @section('content')
 
-    <nav class="navbar navbar-light bg-faded navbar-expand justify-content-between flex-nowrap flex-row navbar-expand-sm bg-light justify-content-center">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-                <ul class="nav navbar-nav flex-row">
-                    <li class="nav-item">
-                        <a class="nav-link {{'productView'== request()->path() ? 'active' :  ''}}" aria-current="page" href="{{route('product.index')}}">عرض المنتجات</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{'productCreate'== request()->path() ? 'active' : ''}}" aria-current="page" href="{{route('product.create')}}">إنشاء منتج</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{'typeView'== request()->path() ? 'active' :  ''}}" aria-current="page" href="{{route('type.index')}}">الانواع والاصناف</a>
-                    </li>
+            <ul class="navbar-nav">
 
-                </ul>
-
+                <li class="nav-item">
+                    <a class="nav-link glightbox" data-glightbox="type: external" title="انشاء منتج"  href="{{route('product.create')}}">
+                        <i class="nav-icon fa fa-plus-circle" aria-hidden="true"></i>
+                        <p> انشاء منتج </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link glightbox" data-glightbox="type: external" title="انشاء نوع"  href="{{route('type.index')}}">
+                        <i class="nav-icon fa fa-plus-circle" aria-hidden="true"></i>
+                        <p> انشاء نوع </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link glightbox" data-glightbox="type: external" title="انشاء صنف"  href="{{route('product.create')}}">
+                        <i class="nav-icon fa fa-plus-circle" aria-hidden="true"></i>
+                        <p> انشاء صنف </p>
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
-    @yield('type')
 
+
+    @yield('type')
 
 @endsection
 
 @section('script')
+
+
 @endsection

@@ -52,7 +52,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a href="/product" class="nav-link {{request()->path() ==  'productCreate'? 'active' : ''}}{{request()->path() ==  'product'? 'active' : ''}}{{request()->path() ==  'productView' ? 'active' : ''}}{{request()->path() ==  'typeView' ? 'active' : ''}}">
+                    <a href="/productView" class="nav-link {{request()->path() ==  'productView' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                              المنتجات
@@ -68,7 +68,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/feedback" class="nav-link {{request()->path() ==  'feedback'? 'active' : ''}}">
+                    <a href="/feedbackView" class="nav-link {{request()->path() ==  'feedbackView'? 'active' : ''}} {{request()->path() ==  'feedbackReadView'? 'active' : ''}}">
                         <i class="nav-icon fa fa-paper-plane" aria-hidden="true"></i>
                         <p>
                             رسائل التواصل

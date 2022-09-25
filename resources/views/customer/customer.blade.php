@@ -111,12 +111,22 @@
 
     <script>
         $(document).ready( function () {
-            $('#example1').DataTable();
+            $('#example1').DataTable({
+                lengthMenu: [
+                    [5,10, 25, 50, -1],
+                    [5,10, 25, 50, 'All'],
+                ],
+            });
         } );
     </script>
     <script>
         $(document).ready( function () {
-            $('#example2').DataTable();
+            $('#example2').DataTable({
+                lengthMenu: [
+                    [5,10, 25, 50, -1],
+                    [5,10, 25, 50, 'All'],
+                ],
+            });
         } );
     </script>
 

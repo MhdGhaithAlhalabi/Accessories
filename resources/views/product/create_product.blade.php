@@ -1,29 +1,25 @@
-@extends('product.product')
+<!DOCTYPE HTML>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>create product</title>
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte_l.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-@section('title')
-انشاء منتج
-@endsection
+</head>
+<body>
 
-@section('page_name')
-    انشاء منتج
-@endsection
 
-@section('second_directory')
-    انشاء منتج
-@endsection
 
-@section('first_directory')
-المنتجات
-@endsection
+<div class="container" style="padding: 5px">
 
-@section('type')
-
-    <div class="container">
-        @if(session()->has('message'))
-            <div class="alert alert-success">
-                {{ session()->get('message') }}
-            </div>
-        @endif
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
     <div class="card card-warning">
         <div class="card-header">
             <h3 class="card-title">اضافة منتج</h3>
@@ -57,21 +53,21 @@
 
                 <!-- input states -->
                 <div class="form-group">
-                        <!-- text input -->
-                        <div class="form-group">
-                            <label>السعر</label>
-                            <input type="text" name="price" class="form-control" placeholder="السعر">
-                        </div>
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>السعر</label>
+                        <input type="text" name="price" class="form-control" placeholder="السعر">
+                    </div>
                     @if($errors->has('price'))
                         <div class="alert alert-danger">{{ $errors->first('price') }}</div>
                     @endif
                 </div>
-                <div class="col-sm-6">
+                <div class="col">
                     <!-- radio -->
                     <div class="form-group">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" value="1" name="status">
-                            <label class="form-check-label">يوجد عرض</label>
+                            <label class="form-check-label">  يوجد عرض </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" value="0" name="status" checked="">
@@ -92,7 +88,7 @@
                         <div class="alert alert-danger">{{ $errors->first('priceSale') }}</div>
                     @endif
                 </div>
-                <div class="col-sm-6">
+                <div class="col">
                     <!-- radio -->
                     <div class="form-group">
                         <div class="form-check">
@@ -114,10 +110,10 @@
                         <!-- select -->
                         <div class="form-group">
                             <label>النوع</label>
-                            <select name="type_id" class="form-control type">
+                            <select name="type_id" class="form-control" id="type_1">
                                 <option value="0" selected disabled>اختر النوع</option>
-                            @foreach($types as $type)
-                                <option value="{{$type->id}}"> {{$type->type_name}}</option>
+                                @foreach($types as $type)
+                                    <option value="{{$type->id}}"> {{$type->type_name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -140,7 +136,7 @@
                             <div class="alert alert-danger">{{ $errors->first('category_id') }}</div>
                         @endif
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col">
                         <!-- radio -->
                         <div class="form-group">
                             <div class="form-check">
@@ -166,42 +162,51 @@
             </form>
         </div>
     </div>
-    </div>
-        <!-- /.card-body -->
+</div>
 
 
 
-    <script type="text/javascript">
-        $(document).ready(function() {
 
-            $(document).on('change', '.type', function() {
 
-                var type_id = $(this).val();
-                var div = $(this).parent();
-                var op = " ";
 
-                $.ajax({
-                    type: 'get',
-                    url: '{!! URL::to('findTypeByName')!!}',
-                    data: {
-                        'id': type_id
-                    },
-                    success: function(data) {
-                        //console.log(data);
-                        op += '<option value="0" selected disabled>اختر الصنف</option>';
-                        for (var i = 0; i < data.length; i++) {
-                            op += '<option value="' + data[i].id + '">' + data[i].category_name +'</option>';
-                        }
-                        $('#category').html('');
-                        $('#category').append(op);
-                    },
-                    error: function() {
 
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $(document).on('change', '#type_1', function() {
+
+            var type_id = $(this).val();
+            var div = $(this).parent();
+            var op = " ";
+
+            $.ajax({
+                type: 'get',
+                url: '{!! URL::to('findTypeByName')!!}',
+                data: {
+                    'id': type_id
+                },
+                success: function(data) {
+                    //console.log(data);
+                    op += '<option value="0" selected disabled>اختر الصنف</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        op += '<option value="' + data[i].id + '">' + data[i].category_name +'</option>';
                     }
-                });
+                    $('#category').html('');
+                    $('#category').append(op);
+                },
+                error: function() {
+
+                }
             });
         });
+    });
 </script>
 
-@endsection
+</body>
+</html>
+
+
+
+
+
 
