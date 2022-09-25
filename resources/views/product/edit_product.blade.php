@@ -1,26 +1,19 @@
-@extends('product.product')
+<!DOCTYPE HTML>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>تعديل المنتج</title>
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte_l.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-@section('title')
-تعديل منتج
-@endsection
-
-@section('page_name')
-    تعديل منتج
-@endsection
-
-@section('second_directory')
-    تعديل منتج
-@endsection
-
-@section('first_directory')
-المنتجات
-@endsection
-@section('type')
-
+</head>
+<body>
     <div class="container">
         <div class="card card-warning">
             <div class="card-header">
-                <h3 class="card-title">اضافة منتج</h3>
+                <h3 class="card-title">تعديل منتج</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -202,5 +195,5 @@
     </script>
 
 
-@endsection
-
+</body>
+</html>

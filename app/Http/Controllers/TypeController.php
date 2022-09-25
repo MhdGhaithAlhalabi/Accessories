@@ -32,7 +32,8 @@ class TypeController extends Controller
      */
     public function create()
     {
-        return view('type.create_type');
+        $types = Type::all();
+        return view('type.create_type',compact('types'));
     }
 
     /**
@@ -55,7 +56,7 @@ class TypeController extends Controller
         $validator = Validator::make($request->all(), $rules,$customMessages);
 
         if ($validator->fails()) {
-            return redirect()->route('type.index')->withErrors($validator);
+            return redirect()->route('type.create')->withErrors($validator);
         }
 
         $product = Type::create([
@@ -63,7 +64,7 @@ class TypeController extends Controller
 
         ]);
 
-        return redirect()->route('type.index')->with('message','تمت اضافة النوع');
+        return redirect()->route('type.create')->with('message','تمت اضافة النوع');
     }
 
 
@@ -104,10 +105,10 @@ class TypeController extends Controller
         }
         if(asset($type)){
             $type->update($request->all());
-            return redirect()->route('type.index')->with('message','تمت تعديل النوع');
+            return redirect()->route('type.create')->with('message','تمت تعديل النوع');
 
         }else{
-            return redirect()->route('type.index')->with('message','لا يمكن الاضافة');
+            return redirect()->route('type.create')->with('message','لا يمكن الاضافة');
         }
 
     }
@@ -121,7 +122,7 @@ class TypeController extends Controller
     public function destroy(Type $type)
     {
         $type->delete();
-        return redirect()->route('type.index')
+        return redirect()->route('type.create')
             ->with('message','تم حذف النوع');
     }
     public function findTypeByName(Request $request)

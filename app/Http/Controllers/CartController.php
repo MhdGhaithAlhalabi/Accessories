@@ -33,7 +33,7 @@ class CartController extends Controller
             $cart->status = 'done';
             $cart->save();
 
-        return redirect()->route('dashboard')->with('message','تمت التعيين كجاهزة');
+        return redirect()->back()->with('message','تمت التعيين كجاهزة');
 
     }
 
@@ -46,7 +46,11 @@ class CartController extends Controller
     public function destroy(Cart $cart)
     {
         $cart->delete();
-        return redirect()->route('dashboard')
+        return redirect()->route('cart.ondel')
             ->with('message','تم حذف الطلب');
+    }
+    public function ondel()
+    {
+        return view('cart.ondel');
     }
 }

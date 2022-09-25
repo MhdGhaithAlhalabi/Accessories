@@ -1,24 +1,24 @@
-@extends('product.product')
+<!DOCTYPE HTML>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title> تعديل صورة</title>
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte_l.css') }}">
 
-@section('title')
-    تعديل صورة
-@endsection
+</head>
+<body>
 
-@section('page_name')
-    تعديل صورة
-@endsection
 
-@section('second_directory')
-    تعديل صورة
-@endsection
+<div class="container" style="padding: 5px">
 
-@section('first_directory')
-     عرض المنتجات
-@endsection
-@section('type')
-
-<div class="container">
-    <p>تعديل صورة</p>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">تعديل صورة</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
 <form action="{{route('image.update',$image)}}" method="POST">
     @csrf
     <div class="form-group">
@@ -43,6 +43,9 @@
 </form>
 
 </div>
+    </div>
+</div>
+</body>
+</html>
 
-@endsection
 

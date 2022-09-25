@@ -1,28 +1,15 @@
-@extends('layouts.master')
+<!DOCTYPE HTML>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>create product</title>
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte_l.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-@section('css')
-
-@endsection
-
-@section('title')
-    الطلب
-@endsection
-
-
-@section('page_name')
-    الطلب
-@endsection
-
-@section('second_directory')
-    الطلب
-@endsection
-
-@section('first_directory')
-    الطلبات
-@endsection
-
-@section('content')
-
+</head>
+<body>
     <div class="row">
         @if(session()->has('message'))
             <div class="alert alert-success">
@@ -58,7 +45,7 @@
                             <form  action="{{route('cart.delete',$cart->id)}}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" style="margin-block: 2px" class="btn btn-danger btn-block">حذف</button>
+                                <button type="submit" id="del" style="margin-block: 2px" class="btn btn-danger btn-block">حذف</button>
                             </form>
                         </div>
                     @endif
@@ -145,22 +132,8 @@
                         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-@endsection
-
-@section('script')
-
-
-@endsection
+</body>
+</html>
 
 
 

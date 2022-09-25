@@ -99,6 +99,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cartView/{cart}', [CartController::class, 'cartView'])->name('cart.cartView');
     Route::post('/cartDone/{cart}', [CartController::class, 'cartDone'])->name('cart.done');
     Route::delete('/cartDelete/{cart}', [CartController::class, 'destroy'])->name('cart.delete');
+    Route::get('/ondel', [CartController::class, 'ondel'])->name('cart.ondel');
+
     //Route::get('/cartDoneView', [CartController::class, 'cartDoneView'])->name('cart.done.index');
     Route::get('/monthlyReport', [CartController::class, 'monthlyReport'])->name('monthlyReport');
     Route::get('/dailyReport', [CartController::class, 'dailyReport'])->name('dailyReport');

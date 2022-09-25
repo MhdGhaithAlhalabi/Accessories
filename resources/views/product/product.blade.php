@@ -4,10 +4,6 @@
 المنتجات
 @endsection
 
-@section('css')
-
-@endsection
-
 @section('page_name')
     المنتجات
 @endsection
@@ -33,13 +29,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link glightbox" data-glightbox="type: external" title="انشاء نوع"  href="{{route('type.index')}}">
+                    <a class="nav-link glightbox" data-glightbox="type: external" title="انشاء نوع"  href="{{route('type.create')}}">
                         <i class="nav-icon fa fa-plus-circle" aria-hidden="true"></i>
                         <p> انشاء نوع </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link glightbox" data-glightbox="type: external" title="انشاء صنف"  href="{{route('product.create')}}">
+                    <a class="nav-link glightbox" data-glightbox="type: external" title="انشاء صنف"  href="{{route('category.create')}}">
                         <i class="nav-icon fa fa-plus-circle" aria-hidden="true"></i>
                         <p> انشاء صنف </p>
                     </a>
@@ -53,7 +49,4 @@
 
 @endsection
 
-@section('script')
 
-
-@endsection

@@ -28,7 +28,8 @@ class CategoryController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('category.create_category',compact('types'));
+        $categories = Category::with('type')->get();
+        return view('category.create_category',compact('types','categories'));
     }
 
     /**
@@ -55,7 +56,7 @@ class CategoryController extends Controller
 
 
         if ($validator->fails()) {
-            return redirect()->route('type.index')->withErrors($validator);
+            return redirect()->route('category.create')->withErrors($validator);
         }
 
         $category = Category::create([
@@ -64,7 +65,7 @@ class CategoryController extends Controller
             'category_image'=>$request->category_image
         ]);
 
-        return redirect()->route('type.index')->with('message','تمت اضافة الصنف');
+        return redirect()->route('category.create')->with('message','تمت اضافة الصنف');
     }
 
 
@@ -108,10 +109,10 @@ class CategoryController extends Controller
         }
         if(asset($category)){
             $category->update($request->all());
-            return redirect()->route('type.index')->with('message','تم تعديل الصنف');
+            return redirect()->route('category.create')->with('message','تم تعديل الصنف');
 
         }else{
-            return redirect()->route('type.index')->with('message','لا يمكنك التعديل');
+            return redirect()->route('category.create')->with('message','لا يمكنك التعديل');
         }
     }
 
@@ -124,7 +125,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('type.index')
+        return redirect()->route('category.create')
             ->with('message','تم حذف الصنف');
     }
 }

@@ -94,7 +94,8 @@ class ColorController extends Controller
     {
         $rules = [
             'color' => ['required', 'string', 'max:255'],
-            'product_id'=>['required']      ];
+            'product_id'=>['required'] ,
+            'color_hex'=>'required'];
 
         $customMessages = [
             'required' => 'هذا الحقل مطلوب',
@@ -106,10 +107,10 @@ class ColorController extends Controller
         }
         if(asset($color)){
             $color->update($request->all());
-            return redirect()->route('product.index')->with('message','تم تعديل اللون');
+            return redirect()->route('color.edit',$color)->with('message','تم تعديل اللون');
 
         }else{
-            return redirect()->route('product.index')->with('message','لا يمكن التعديل');
+            return redirect()->route('color.edit',$color)->with('message','لا يمكن التعديل');
         }
     }
 

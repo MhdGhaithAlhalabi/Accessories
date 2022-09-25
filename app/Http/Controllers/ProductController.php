@@ -160,10 +160,10 @@ class ProductController extends Controller
         }
         if(asset($product)){
             $product->update($request->all());
-            return redirect()->route('product.index')->with('message','success');
+            return redirect()->route('product.edit',$product)->with('message','success');
 
         }else{
-            return redirect()->route('product.index')->with('message','you cant do that');
+            return redirect()->route('product.edit',$product)->with('message','you cant do that');
         }
 
     }

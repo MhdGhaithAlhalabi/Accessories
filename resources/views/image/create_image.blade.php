@@ -1,25 +1,24 @@
-@extends('product.product')
+<!DOCTYPE HTML>
+<html lang="en" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title> انشاء صورة</title>
+<link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte_l.css') }}">
 
-@section('title')
-    انشاء صورة
-@endsection
+</head>
+<body>
 
-@section('page_name')
-    انشاء صورة
-@endsection
 
-@section('second_directory')
-    انشاء صورة
-@endsection
+<div class="container" style="padding: 5px">
 
-@section('first_directory')
-     عرض المنتجات
-@endsection
-
-@section('type')
-
-    <div class="container">
-        <p>انشاء صورة</p>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">انشاء صورة</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
         <form action="{{route('image.store')}}" method="POST">
             @csrf
             <div class="form-group">
@@ -51,6 +50,9 @@
         </form>
 
     </div>
+    </div>
+</div>
+</body>
+</html>
 
-@endsection
 

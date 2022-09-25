@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-
 @endsection
 @section('page_name')
     عرض المنتجات
@@ -24,7 +23,7 @@
 
 @section('type')
     <div class="container-fluid">
-        <div class="card card-primary" style="direction: rtl">
+        <div class="card card-primary table-responsive" style="direction: rtl">
             <div class="card-header">
                 <h3 class="card-title">المنتجات</h3>
             </div>
@@ -37,7 +36,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="table-responsive-sm table-responsive-md table-responsive-lg">
+                            <div class="table-responsive">
                                 <table id="example1" class="table table-bordered table-hover dataTable dtr-inline"
                                        role="grid" aria-describedby="example2_info">
                                     <thead>
@@ -129,14 +128,16 @@
                                                             </form>
                                                         </div>
                                                         <div class="col-sm">
-                                                            <a class="btn btn-primary btn-block"
+                                                            <a class="btn btn-primary btn-block glightbox"
                                                                style="margin-block: 2px"
+                                                               data-glightbox="type: external" title="تعديل اللون "
                                                                href="{{route('color.edit' ,$color->id)}}"> تعديل
                                                                 اللون</a>
                                                         </div>
                                                         <div class="col-sm">
-                                                            <a class="btn btn-success btn-block"
+                                                            <a class="btn btn-success btn-block glightbox"
                                                                style="margin-block: 2px"
+                                                               data-glightbox="type: external" title=" اضافة صورة "
                                                                href="{{route('image.create' ,$color->id)}}"> اضافة صورة
                                                                 للون {{ $color->color }}</a>
                                                         </div>
@@ -165,8 +166,9 @@
                                                             </form>
                                                         </div>
                                                         <div class="col-sm">
-                                                            <a class="btn btn-primary btn-block"
+                                                            <a class="btn btn-primary btn-block glightbox"
                                                                style="margin-block: 2px"
+                                                               data-glightbox="type: external" title="تعديل الصورة  "
                                                                href="{{route('image.edit' ,$image->id)}}"> تعديل
                                                                 الصورة</a>
                                                         </div>
@@ -181,7 +183,9 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col-sm">
-                                                        <a class="btn btn-success btn-block" style="margin-block: 2px"
+                                                        <a class="btn btn-success btn-block glightbox"
+                                                           style="margin-block: 2px"
+                                                           data-glightbox="type: external" title=" اضافة لون "
                                                            href="{{route('color.create' ,$product->id)}}"> اضافة لون</a>
                                                     </div>
                                                 </div>
@@ -189,8 +193,12 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col-sm">
-                                                        <a class="btn btn-primary btn-block" style="margin-block: 2px"
-                                                           href="{{route('product.edit' ,$product->id)}}"> التعديل</a>
+                                                        <a class="btn btn-primary btn-block glightbox"
+                                                           style="margin-block: 2px"
+                                                           data-glightbox="type: external" title="تعديل منتج "
+                                                           href="{{route('product.edit' ,$product->id)}}">
+                                                            <p>التعديل</p>
+                                                        </a>
                                                     </div>
 
                                                     <div class="col-sm">
@@ -238,10 +246,6 @@
 @endsection
 
 @section('script')
-    <!-- jQuery -->
-    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -256,24 +260,18 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
     <!-- AdminLTE App -->
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('assets/dist/js/demo.js')}}"></script>
     <script>
-        $(function () {
+        lightbox.on('close', () => {
+            location.reload();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
             $("#example1").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "responsive": true,
                 "buttons": ["copy", "pdf", "print", "colvis"],
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
 
-            });
         });
     </script>
 

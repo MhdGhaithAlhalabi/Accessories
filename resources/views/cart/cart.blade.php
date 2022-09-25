@@ -40,7 +40,7 @@
 
     <div class="container">
         <div class="card card-primary" style="direction: rtl">
-            <div class="card-header" >
+            <div class="card-header">
                 <h3 class="card-title">الطلبات المنتظرة</h3>
             </div>
             <!-- /.card-header -->
@@ -76,10 +76,14 @@
                                         <td>{{$cart->created_at}}</td>
                                         <td>
                                             <div class="row">
-                                                    <form  action="{{route('cart.cartView',$cart->id)}}" method="get">
-                                                        <button type="submit" style="margin-block: 2px" class="btn btn-success btn-block">عرض التفاصيل</button>
-                                                    </form>
-                                                </div>
+
+                                                <a class="btn btn-success btn-block glightbox" style="margin-block: 2px"
+                                                   data-glightbox="type: external" title="انشاء نوع"
+                                                   href="{{route('cart.cartView',$cart->id)}}">
+                                                    <p> عرض التفاصيل </p>
+                                                </a>
+
+                                            </div>
 
                                         </td>
 
@@ -107,7 +111,7 @@
     </div>
     <div class="container">
         <div class="card card-primary" style="direction: rtl">
-            <div class="card-header" >
+            <div class="card-header">
                 <h3 class="card-title">الطلبات المنتهية</h3>
             </div>
             <!-- /.card-header -->
@@ -143,10 +147,12 @@
                                         <td>{{$cart->created_at}}</td>
                                         <td>
                                             <div class="row">
-                                                <form  action="{{route('cart.cartView',$cart->id)}}" method="get">
 
-                                                    <button type="submit" style="margin-block: 2px" class="btn btn-success btn-block">عرض التفاصيل</button>
-                                                </form>
+                                                <a class="btn btn-success btn-block glightbox" style="margin-block: 2px"
+                                                   data-glightbox="type: external" title="انشاء نوع"
+                                                   href="{{route('cart.cartView',$cart->id)}}">
+                                                    <p> عرض التفاصيل </p>
+                                                </a>
                                             </div>
                                         </td>
 
@@ -195,26 +201,30 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
     <!-- AdminLTE App -->
-
     <script>
-        $(document).ready( function () {
-            $('#example1').DataTable({
-                lengthMenu: [
-                    [5,10, 25, 50, -1],
-                    [5,10, 25, 50, 'All'],
-                ],
-            });
-        } );
+        lightbox.on('close', () => {
+            location.reload();
+        });
     </script>
     <script>
-        $(document).ready( function () {
-            $('#example2').DataTable({
+        $(document).ready(function () {
+            $('#example1').DataTable({
                 lengthMenu: [
-                    [5,10, 25, 50, -1],
-                    [5,10, 25, 50, 'All'],
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, 'All'],
                 ],
             });
-        } );
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#example2').DataTable({
+                lengthMenu: [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, 'All'],
+                ],
+            });
+        });
     </script>
 
 @endsection

@@ -105,10 +105,10 @@ class ImageController extends Controller
         }
         if(asset($image)){
             $image->update($request->all());
-            return redirect()->route('product.index')->with('message','تم تعديل الصورة');
+            return redirect()->route('image.edit',$image)->with('message','تم تعديل الصورة');
 
         }else{
-            return redirect()->route('product.index')->with('message','لا يمكن التعديل');
+            return redirect()->route('image.edit',$image)->with('message','لا يمكن التعديل');
         }
     }
 
