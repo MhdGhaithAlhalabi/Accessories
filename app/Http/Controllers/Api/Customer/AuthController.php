@@ -60,10 +60,10 @@ class AuthController extends Controller
     }
     public function register(Request $request){
         $rules = [
-            'name' => ['required','string','max:255'],
-            'phone' =>[ 'required','string','max:255','unique:customers'],
+            'name' => ['required','string','max:25'],
+            'phone' =>[ 'required','numeric','digits_between:10,10','unique:customers'],
             'password' => ['required','string','min:6'],
-            'city'=>['required']
+            'city'=>['required','string','max:25']
         ];
 
         $validator = Validator::make($request->all(), $rules);
