@@ -14,6 +14,7 @@ use App\Traits\GeneralTrait;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -64,7 +65,7 @@ class CustomerController extends Controller
     {
         try {
             $rates = $request->rateList;
-            $customerId = $request->customer_id;
+            $customerId =auth()->user()->id;
             $rate = json_decode($rates, true);
             $collection = collect($rate);
             $validator = Validator::make([
@@ -130,7 +131,7 @@ class CustomerController extends Controller
         return$this->returnSuccessMessage('rate stored');
 
     }
-    public function orderCustomerView($customer_id)
+    public function orderCustomerView()
     {
         $carts = Cart::with('order:cart_id,qty,product_id,color,has_name,has_measure',
             'order.product:id,name,details,price,priceSale,status,rate,type_id,category_id,has_name,has_measure',
@@ -138,7 +139,7 @@ class CustomerController extends Controller
             'order.product.category:id,type_id,category_name,category_image',
             'order.product.color:id,color,product_id,color_hex',
             'order.product.color.image:id,url,color_id')
-            ->where('customer_id', '=', $customer_id)
+            ->where('customer_id', '=', auth()->user()->id)
             ->latest()->get();
         return $this->returnData('carts',$carts)   ;
     }
@@ -193,7 +194,7 @@ class CustomerController extends Controller
                 }
 
             }
-            $customer_id = $request->customer_id;
+            $customer_id = auth()->user()->id;
             $amount = $c_price;
             $address =$request->address;
             $validator = Validator::make([
@@ -277,7 +278,7 @@ class CustomerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'message' => ['required'],
-            'customer_id' => ['required'],
+
         ]);
 
         if ($validator->fails()) {
@@ -287,7 +288,7 @@ class CustomerController extends Controller
 
         Feedback::create([
             'message' => $request->message,
-            'customer_id' => $request->customer_id,
+            'customer_id' => auth()->user()->id,
             'status' => 0
         ]);
 
@@ -303,12 +304,35 @@ class CustomerController extends Controller
 
         $menu = Type::with(['category','product'=>function($q) use ($menu_product_id) {
             $q ->whereIn('id', $menu_product_id);
-        },'product.color','product.color.image'])->get();
+        },'product.color','product.color.image'])
+            ->get();
 
-        $offer = Product::with('color','color.image')->where('status','=','1')->whereIn('id', $menu_product_id)->get();
+        $offer = Product::with('color','color.image')
+            ->where('status','=','1')
+            ->whereIn('id', $menu_product_id)
+            ->get();
+        $recently = Product::with('color','color.image')
+            ->whereMonth('created_at', date('m'))
+            ->whereIn('id', $menu_product_id)
+            ->get();
 
-        $recently = Product::with('color','color.image')->whereMonth('created_at', date('m'))->whereIn('id', $menu_product_id)->get();
-        return $this->returnData('home',['menu'=>$menu,'offer'=>$offer,'recently_month'=>$recently]);
+
+        $cart = Cart::Join('orders', 'orders.cart_id', '=', 'carts.id')
+            ->join('products', 'products.id', '=', 'orders.product_id')
+            ->join('types', 'types.id', '=', 'products.type_id')
+            ->select('types.id')
+            ->where('carts.customer_id','=',auth()->user()->id)
+        ->get();
+
+        $Collection1 = collect($cart)->countBy('id')->sortDesc();
+        $Collection2 = $Collection1->keys()->first();
+        $c = $Collection2;
+        $recommend = Product::with('type','color','color.image')
+            ->where('type_id', '=', $c)
+            ->whereIn('id', $menu_product_id)
+            ->inRandomOrder()->limit(5)->get();
+
+        return $this->returnData('home',['menu'=>$menu,'offer'=>$offer,'recently_month'=>$recently,'recommend'=>$recommend]);
     }
 
 }

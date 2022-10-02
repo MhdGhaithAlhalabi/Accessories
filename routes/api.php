@@ -40,7 +40,7 @@ Route::group(['prefix' => 'customer','namespace'=>'Customer','middleware'=>'auth
     Route::post('/feedbackStore', [CustomerController::class, 'feedbackStore']);//flutter
     Route::get('/menu', [CustomerController::class, 'menu']);//flutter
     Route::post('/orderStore', [CustomerController::class, 'orderStore']);//flutter
-    Route::get('/orderCustomerView/{customer_id}', [CustomerController::class, 'orderCustomerView']);//flutter
+    Route::get('/orderCustomerView', [CustomerController::class, 'orderCustomerView']);//flutter
     Route::post('/rateStore', [CustomerController::class, 'rateStore']);//flutter
     Route::get('/typeView', [CustomerController::class, 'typeView']);//flutter
     Route::get('/categoryView/{id}', [CustomerController::class, 'categoryView']);//flutter
