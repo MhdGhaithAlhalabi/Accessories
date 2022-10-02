@@ -300,7 +300,15 @@ class CustomerController extends Controller
         $menu = Product::with('type:id,type_name','category:id,category_name,type_id,category_image','color:id,color,product_id,color_hex','color.image:id,url,color_id')
             ->whereIn('id', $menu_product_id)
             ->get();
-        return $this->returnData('menu',$menu);
+
+        $menu = Type::with(['category','product'=>function($q) use ($menu_product_id) {
+            $q ->whereIn('id', $menu_product_id);
+        },'product.color','product.color.image'])->get();
+
+        $offer = Product::with('color','color.image')->where('status','=','1')->whereIn('id', $menu_product_id)->get();
+
+        $recently = Product::with('color','color.image')->whereMonth('created_at', date('m'))->whereIn('id', $menu_product_id)->get();
+        return $this->returnData('home',['menu'=>$menu,'offer'=>$offer,'recently_month'=>$recently]);
     }
 
 }

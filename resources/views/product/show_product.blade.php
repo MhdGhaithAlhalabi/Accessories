@@ -128,13 +128,14 @@
                                                             </form>
                                                         </div>
                                                         <div class="col-sm">
-                                                            <a class="btn btn-primary btn-block glightbox"
+                                                            <a class="glightbox btn btn-primary btn-block "
                                                                style="margin-block: 2px"
                                                                data-glightbox="type: external" title="تعديل اللون "
                                                                href="{{route('color.edit' ,$color->id)}}"> تعديل
                                                                 اللون</a>
                                                         </div>
                                                         <div class="col-sm">
+
                                                             <a class="btn btn-success btn-block glightbox"
                                                                style="margin-block: 2px"
                                                                data-glightbox="type: external" title=" اضافة صورة "
@@ -268,7 +269,7 @@
     <script>
         $(document).ready(function () {
             $("#example1").DataTable({
-                "responsive": true,
+               // "responsive": true,
                 "buttons": ["copy", "pdf", "print", "colvis"],
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
