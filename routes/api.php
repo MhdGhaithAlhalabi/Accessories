@@ -37,15 +37,17 @@ Route::group(['prefix' => 'customer','namespace'=>'Customer'],function () {
 Route::group(['prefix' => 'customer','namespace'=>'Customer','middleware'=>'auth:customer-api'],function () {
 ///////////////////////////////flutter api////////////////////////////////
     //Api \ Customer \ CustomerController
-    Route::post('/feedbackStore', [CustomerController::class, 'feedbackStore']);//flutter
-    Route::get('/menu', [CustomerController::class, 'menu']);//flutter
-    Route::post('/orderStore', [CustomerController::class, 'orderStore']);//flutter
+    Route::get('/home', [CustomerController::class, 'home']);//flutter
     Route::get('/orderCustomerView', [CustomerController::class, 'orderCustomerView']);//flutter
+    Route::get('/searchByName/{name}', [CustomerController::class, 'searchByName']);//flutter
+    Route::post('/feedbackStore', [CustomerController::class, 'feedbackStore']);//flutter
+    Route::post('/orderStore', [CustomerController::class, 'orderStore']);//flutter
     Route::post('/rateStore', [CustomerController::class, 'rateStore']);//flutter
-    Route::get('/typeView', [CustomerController::class, 'typeView']);//flutter
-    Route::get('/categoryView/{id}', [CustomerController::class, 'categoryView']);//flutter
-    Route::get('/productView/{type_id}/{category_id}', [CustomerController::class, 'productView']);//flutter
-    Route::get('/offerView', [CustomerController::class, 'offerView']);//flutter
-    Route::post('/searchByName', [CustomerController::class, 'searchByName']);//flutter
 
+
+
+    /*    Route::get('/typeView', [CustomerController::class, 'typeView']);//flutter
+        Route::get('/categoryView/{id}', [CustomerController::class, 'categoryView']);//flutter
+        Route::get('/productView/{type_id}/{category_id}', [CustomerController::class, 'productView']);//flutter
+        Route::get('/offerView', [CustomerController::class, 'offerView']);//flutter*/
 });
