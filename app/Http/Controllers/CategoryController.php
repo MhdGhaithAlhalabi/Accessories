@@ -41,7 +41,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'category_name' => ['required', 'string', 'max:255', 'unique:categories'],
+            'category_name' => ['required', 'string', 'max:255'],
             'type_id'=>['required'],
             'category_image'=>['required','url'],
         ];
@@ -92,7 +92,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $rules = [
-            'category_name' => ['required', 'string', 'max:255','unique:categories,category_name,'.$category->id],
+            'category_name' => ['required', 'string', 'max:255'],
             'type_id'=>['required'],
             'category_image' => ['required','url']
         ];

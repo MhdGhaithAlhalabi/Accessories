@@ -286,9 +286,9 @@ class CustomerController extends Controller
              ->whereIn('id', $menu_product_id)
              ->get();*/
 
-        $menu = Type::with(['category:id,category_name,type_id,category_image', 'product' => function ($q) use ($menu_product_id) {
+        $menu = Type::with(['category:id,category_name,type_id,category_image', 'category.product' => function ($q) use ($menu_product_id) {
             $q->whereIn('id', $menu_product_id);
-        }, 'product.color:id,color,color_hex,product_id', 'product.color.image:id,url,color_id'])
+        }, 'category.product.color:id,color,color_hex,product_id', 'category.product.color.image:id,url,color_id'])
             ->select('id','type_name')
             ->get();
 
