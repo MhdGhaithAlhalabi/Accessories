@@ -22,9 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 ///////////////////////////////customer auth////////////////////////////////
-Route::group(['prefix' => 'customer','namespace'=>'Customer'],function () {
+Route::group(['prefix' => 'customer', 'namespace' => 'Customer'], function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
     Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:customer-api']);
@@ -34,20 +33,17 @@ Route::group(['prefix' => 'customer','namespace'=>'Customer'],function () {
 
 
 ///////////////////////////////customer api////////////////////////////////
-Route::group(['prefix' => 'customer','namespace'=>'Customer','middleware'=>'auth:customer-api'],function () {
+Route::group(['prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => 'auth:customer-api'], function () {
 ///////////////////////////////flutter api////////////////////////////////
     //Api \ Customer \ CustomerController
-    Route::get('/home', [CustomerController::class, 'home']);//flutter
+    Route::get('/home/{type_id}', [CustomerController::class, 'home']);//flutter
     Route::get('/orderCustomerView', [CustomerController::class, 'orderCustomerView']);//flutter
     Route::get('/searchByName/{name}', [CustomerController::class, 'searchByName']);//flutter
     Route::post('/feedbackStore', [CustomerController::class, 'feedbackStore']);//flutter
     Route::post('/orderStore', [CustomerController::class, 'orderStore']);//flutter
     Route::post('/rateStore', [CustomerController::class, 'rateStore']);//flutter
-
-
-
-    /*    Route::get('/typeView', [CustomerController::class, 'typeView']);//flutter
-        Route::get('/categoryView/{id}', [CustomerController::class, 'categoryView']);//flutter
-        Route::get('/productView/{type_id}/{category_id}', [CustomerController::class, 'productView']);//flutter
-        Route::get('/offerView', [CustomerController::class, 'offerView']);//flutter*/
+    Route::get('/typeView', [CustomerController::class, 'typeView']);//flutter
+    //Route::get('/categoryView/{id}', [CustomerController::class, 'categoryView']);//flutter
+    Route::get('/productView/{category_id}', [CustomerController::class, 'productView']);//flutter
+    //Route::get('/offerView', [CustomerController::class, 'offerView']);//flutter
 });

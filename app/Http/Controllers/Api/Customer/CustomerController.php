@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Feedback;
 use App\Models\Menu;
 use App\Models\Order;
@@ -15,6 +16,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+
 //use Carbon\Carbon;
 class CustomerController extends Controller
 {
@@ -279,24 +281,65 @@ class CustomerController extends Controller
 
     }
 
-    public function home()
+    /*
+        public function home()
+        {
+            $menu_product_id = Menu::all()->pluck('product_id')->values();
+
+
+            $menu = Type::with(['category:id,category_name,type_id,category_image', 'category.product' => function ($q) use ($menu_product_id) {
+                $q->whereIn('id', $menu_product_id);
+            }, 'category.product.color:id,color,color_hex,product_id', 'category.product.color.image:id,url,color_id'])
+                ->select('id','type_name')
+                ->get();
+
+            $offer = Product::with('type:id,type_name','category:id,category_name,type_id,category_image','color:id,color,color_hex,product_id', 'color.image:id,url,color_id')            ->where('status', '=', '1')
+                ->whereIn('id', $menu_product_id)
+                ->get();
+            $recently = Product::with('type:id,type_name','category:id,category_name,type_id,category_image','color:id,color,color_hex,product_id', 'color.image:id,url,color_id')
+                ->whereMonth('created_at', date('m'))
+                ->whereIn('id', $menu_product_id)
+                ->get();
+
+
+            $cart = Cart::Join('orders', 'orders.cart_id', '=', 'carts.id')
+                ->join('products', 'products.id', '=', 'orders.product_id')
+                ->join('types', 'types.id', '=', 'products.type_id')
+                ->select('types.id')
+                ->where('carts.customer_id', '=', auth()->user()->id)
+                ->get();
+            $Collection1 = collect($cart)->countBy('id')->sortDesc();
+            $Collection2 = $Collection1->keys()->first();
+            $c = $Collection2;
+            $recommend =Product::with('type:id,type_name','category:id,category_name,type_id,category_image','color:id,color,color_hex,product_id', 'color.image:id,url,color_id')
+                ->where('type_id', '=', $c)
+                ->whereIn('id', $menu_product_id)
+                ->inRandomOrder()->limit(5)->get();
+
+            return $this->returnData('home', ['menu' => $menu, 'offer' => $offer, 'recently_month' => $recently, 'recommend' => $recommend]);
+        }
+        */
+    public function typeView()
     {
+        $types = Type::select('id', 'type_name')
+            ->get();
+        return $this->returnData('types', $types);
+    }
+    public function home($type_id)
+    {
+        $category = Category::select('id', 'category_name', 'type_id', 'category_image')
+            ->where('type_id', '=', $type_id)
+            ->get();
+
         $menu_product_id = Menu::all()->pluck('product_id')->values();
-        /* $menu = Product::with('type:id,type_name', 'category:id,category_name,type_id,category_image', 'color:id,color,product_id,color_hex', 'color.image:id,url,color_id')
-             ->whereIn('id', $menu_product_id)
-             ->get();*/
+        $offer = Product::with('type:id,type_name', 'category:id,category_name,type_id,category_image', 'color:id,color,product_id,color_hex', 'color.image:id,url,color_id')
+            ->where('status', '=', '1')
+            ->where('type_id', '=', $type_id)
+            ->whereIn('id', $menu_product_id)->get();
 
-        $menu = Type::with(['category:id,category_name,type_id,category_image', 'category.product' => function ($q) use ($menu_product_id) {
-            $q->whereIn('id', $menu_product_id);
-        }, 'category.product.color:id,color,color_hex,product_id', 'category.product.color.image:id,url,color_id'])
-            ->select('id','type_name')
-            ->get();
-
-        $offer = Product::with('type:id,type_name','category:id,category_name,type_id,category_image','color:id,color,color_hex,product_id', 'color.image:id,url,color_id')            ->where('status', '=', '1')
-            ->whereIn('id', $menu_product_id)
-            ->get();
         $recently = Product::with('type:id,type_name','category:id,category_name,type_id,category_image','color:id,color,color_hex,product_id', 'color.image:id,url,color_id')
             ->whereMonth('created_at', date('m'))
+            ->where('type_id', '=', $type_id)
             ->whereIn('id', $menu_product_id)
             ->get();
 
@@ -315,32 +358,37 @@ class CustomerController extends Controller
             ->whereIn('id', $menu_product_id)
             ->inRandomOrder()->limit(5)->get();
 
-        return $this->returnData('home', ['menu' => $menu, 'offer' => $offer, 'recently_month' => $recently, 'recommend' => $recommend]);
+        return $this->returnData('home', ['category' => $category, 'offer' => $offer, 'recently_month' => $recently, 'recommend' => $recommend]);
+
+
     }
 
-    /*    public function typeView(){
-            $types = Type::select('id','type_name')
-                ->get();
-            return $this->returnData('types',$types);
-        }
-        public function categoryView($id){
-            $category = Category::select('id','category_name','type_id','category_image')
-                ->where('type_id','=',$id)
-                ->get();
-            return $this->returnData('category',$category);
-        }
-        public function productView($type_id,$category_id){
-            $menu_product_id = Menu::all()->pluck('product_id')->values();
-            $product = Product::all()->where('type_id','=',$type_id)
-                ->where('category_id','=',$category_id)
-                ->whereIn('id',$menu_product_id) ;
-            return $this->returnData('product',$product);
-        }
-        public function offerView(){
-            $menu_product_id = Menu::all()->pluck('product_id')->values();
-            $product = Product::with('type:id,type_name','category:id,category_name,type_id,category_image','color:id,color,product_id,color_hex','color.image:id,url,color_id')
-                ->where('status','=','1')
-                ->whereIn('id',$menu_product_id)->get() ;
-            return $this->returnData('product',$product);
-        }*/
+
+
+   /* public function categoryView($id)
+    {
+        $category = Category::select('id', 'category_name', 'type_id', 'category_image')
+        ->where('type_id', '=', $id)
+        ->get();
+        return $this->returnData('category', $category);
+    }*/
+
+    public function productView($category_id)
+    {
+        $menu_product_id = Menu::all()->pluck('product_id')->values();
+        $product = Product::all()
+            ->where('category_id', '=', $category_id)
+            ->whereIn('id', $menu_product_id);
+        return $this->returnData('product', $product);
+    }
+
+    /*public function offerView($type_id)
+    {
+        $menu_product_id = Menu::all()->pluck('product_id')->values();
+        $product = Product::with('type:id,type_name', 'category:id,category_name,type_id,category_image', 'color:id,color,product_id,color_hex', 'color.image:id,url,color_id')
+            ->where('status', '=', '1')
+            ->where('type_id', '=', $type_id)
+            ->whereIn('id', $menu_product_id)->get();
+        return $this->returnData('product', $product);
+    }*/
 }
