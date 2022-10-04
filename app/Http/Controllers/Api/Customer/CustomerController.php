@@ -376,9 +376,10 @@ class CustomerController extends Controller
     public function productView($category_id)
     {
         $menu_product_id = Menu::all()->pluck('product_id')->values();
-        $product = Product::all()
-            ->where('category_id', '=', $category_id)
-            ->whereIn('id', $menu_product_id);
+        $product = Product::
+            where('category_id', '=', $category_id)
+            ->whereIn('id', $menu_product_id)
+        ->get();
         return $this->returnData('product', $product);
     }
 
